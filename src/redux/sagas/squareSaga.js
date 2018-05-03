@@ -83,6 +83,14 @@ function* cashTotalSaga(action){
         })
     } catch (error) {}
 }
+
+function* cashPaymentPost(action){
+    console.log('post new product')
+    try {
+        const cashPaymentPost = yield call(axios.post, '/api/square/postcash', action.payload);
+        
+    } catch (error) {}
+}
 // 'POST_CASH'
 function* squareSaga() {
     
@@ -93,6 +101,7 @@ function* squareSaga() {
     yield takeEvery('DELETE_PRODUCT', deleteProduct);
     yield takeEvery('TOGGLE_CASH', toggleCashPage);
     yield takeEvery('TOTAL_CASH', cashTotalSaga);
+    yield takeEvery('CASH_TRANSACTION', cashPaymentPost);
 }
 
 export default squareSaga;

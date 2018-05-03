@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
     info: state.squareGetReducer
   });
 
-class AddLocation extends React.Component {
+class TransactionHistory extends React.Component {
 
 
     componentDidMount() {
@@ -57,4 +57,4 @@ class AddLocation extends React.Component {
 
 
   
-  export default connect(mapStateToProps)(AddLocation);
+  export default connect(mapStateToProps)(TransactionHistory);

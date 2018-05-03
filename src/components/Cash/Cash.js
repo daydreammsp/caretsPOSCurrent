@@ -46,8 +46,12 @@ componentDidMount() {
     }
   }
 
-showClick = ()=>{
-  console.log("show clicked")
+submitTotal = (total)=>{
+  console.log("cash total", total)
+  this.props.dispatch({
+    type: 'CASH_TRANSACTION',
+    payload: [total]
+  });
   this.props.dispatch({
     type: 'TOGGLE_CASH',
     payload: true
@@ -55,14 +59,14 @@ showClick = ()=>{
 }
 
 
-handleProductInput = (inputText) => {
-  return (event) => {
-    console.log(inputText)
-    this.setState({
-      [inputText]: event.target.value
-    });
-  }
-}
+// handleProductInput = (inputText) => {
+//   return (event) => {
+//     console.log(inputText)
+//     this.setState({
+//       [inputText]: event.target.value
+//     });
+//   }
+// }
   changeAmount = (amount) => {
     console.log("click change amount")
     this.setState({
@@ -70,21 +74,28 @@ handleProductInput = (inputText) => {
     })
   }
   render() {
-    let changeDue = this.state.cashVal - (this.props.cashPayment/100)
+    let changeDue;
+    if ((this.state.cashVal - (this.props.cashPayment/100) < 1 )){
+      changeDue = 0;
+    }else{
+      changeDue = this.state.cashVal - (this.props.cashPayment/100)
+    }
+    
+     
       let content = null;
   
       if (this.props.user.userName) {
         content = (
           <div>
-            <h2>Cash stringify</h2>
-            <input type='text'
+            <h3>Amount Due</h3>
+            <h2>{(this.props.cashPayment/100).toFixed(2)}</h2>
+            {/* <input type='text'
             value={this.state.cashVal}
             placeholder='product'
-            onChange={this.handleProductInput('product')}></input>
-            <pre>{JSON.stringify(this.props.cashPayment/100)}</pre>
-            <Button onClick={()=>this.showClick()}>Submit</Button>
+            onChange={this.handleProductInput('product')}></input> */}
+            <Button onClick={()=>this.submitTotal((this.props.cashPayment/100))}>Submit Payment</Button>
             <h3>Change Due</h3>
-            <h1>{changeDue}</h1>
+            <h1>{(changeDue).toFixed(2)}</h1>
             <Button onClick={()=>this.changeAmount(10)}>10 Dollars</Button>
             <Button onClick={()=>this.changeAmount(20)}>20 Dollars</Button>
             <Button onClick={()=>this.changeAmount(40)}>40 Dollars</Button>

@@ -5,14 +5,14 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
+//TransactionHistory
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
 import Checkout from './components/Checkout/Checkout';
-import AddLocation from './components/AddLocation/AddLocation';
+import TransactionHistory from './components/TransactionHistory/TransactionHistory';
 import CreateMarketDay from './components/CreateMarketDay/CreateMarketDay';
 import ActualAddProduct from './components/ActualAddProduct/ActualAddProduct';
 import Cash from './components/Cash/Cash';
@@ -47,8 +47,8 @@ const App = () => (
           component={CheckoutMain}
         />
         <Route
-          path="/AddLocation"
-          component={AddLocation}
+          path="/TransactionHistory"
+          component={TransactionHistory}
         />
         <Route
           path="/CreateMarketDay"

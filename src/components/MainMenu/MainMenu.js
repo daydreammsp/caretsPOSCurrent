@@ -63,8 +63,8 @@ class MainMenu extends React.Component {
         </List>
         <Divider />
         <List>
-        <Link to="/AddLocation">
-           <h2>Add Location</h2>
+        <Link to="/TransactionHistory">
+           <h2>Transactions</h2>
           </Link></List>
         <Divider />
         <List>

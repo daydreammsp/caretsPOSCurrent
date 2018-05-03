@@ -215,4 +215,22 @@ request(options, function (error, response, body){
   console.log(body);
 })
 })
+
+router.post('/postcash', (req, res) => {
+      console.log('POST cash route');
+      console.log(req.body);
+      console.log('is authenticated?', req.isAuthenticated());
+      console.log('user', req.user);
+      if(req.isAuthenticated()){//in order to post an item, user must be signed in
+          let queryText = `INSERT INTO transactions ("total") VALUES ($1);`;
+          pool.query(queryText, req.body).then((result)=>{
+              res.sendStatus(201);
+          }).catch((err)=>{
+              console.log(err);
+              res.sendStatus(500)
+          })
+      } else {
+          res.sendStatus(403);
+      }
+  });
     module.exports = router;

@@ -102,7 +102,7 @@ class Checkout extends React.Component {
       
       let listProducts = this.props.products.map( (product) => {
         return(
-           <div> <Button variant="raised" color="primary" className={classes.button} 
+           <div key={product.id}> <Button variant="raised" color="primary" className={classes.button} 
            onClick={()=>this.handlePriceClick(product.item_data.variations[0].item_variation_data.price_money.amount)}><div>{product.item_data.name} 
            {(product.item_data.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</div>
                 </Button>
