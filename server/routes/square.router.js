@@ -233,4 +233,22 @@ router.post('/postcash', (req, res) => {
           res.sendStatus(403);
       }
   });
+  router.get('/getcash', (req, res) => {
+    
+        console.log('/userinfo GET route');
+        console.log('is authenticated?', req.isAuthenticated());
+        console.log('user', req.user);
+        if (req.isAuthenticated()) {
+            let queryText = `SELECT * FROM transactions;`;
+            pool.query(queryText).then((result) => {
+                res.send(result.rows);
+                console.log(result.rows);
+            }).catch((error) => {
+                console.log(error);
+                res.sendStatus(500);
+            });
+        } else {
+            res.sendStatus(403);
+        }
+    });//end router.get
     module.exports = router;

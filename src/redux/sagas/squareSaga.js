@@ -6,10 +6,13 @@ function* squareGet(action){
     console.log('transaction info saga')
     try {
         const squareGet = yield call(axios.get, '/api/square/get');
+        const cashGet = yield call(axios.get, '/api/square/getcash');
         console.log(squareGet.data)
+        console.log(cashGet.data)
         yield put({
             type: 'DISPLAY_HISTORY',
-            payload: squareGet.data
+            payload: {credit:squareGet.data,
+                        cash: cashGet.data}
         })
     } catch (error) {}
 }

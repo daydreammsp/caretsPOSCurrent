@@ -3,6 +3,9 @@ import MainMenu from '../MainMenu/MainMenu';
 import Nav from '../../components/Nav/Nav';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import NumberFormat from 'react-number-format';
+import Moment from 'react-moment';
+
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -30,7 +33,10 @@ class TransactionHistory extends React.Component {
     
         let transactions = this.props.info.transactions && this.props.info.transactions.map( (transaction) => {
             return(
-                <h3>{transaction.id}</h3>
+                <h3 key={transaction.id}>
+                <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
+                
+              {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
             )
           })
         let content = null;
@@ -39,9 +45,9 @@ class TransactionHistory extends React.Component {
           content = (
               
             <div>
-              <h2>add location</h2>
+              <h2>Transaction History</h2>
               {transactions}
-              <pre>{JSON.stringify(this.props.info.transactions)}</pre>
+              
             </div>
           );
         }
