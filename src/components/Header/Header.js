@@ -1,7 +1,7 @@
 import React from 'react';
 import MainMenu from '../MainMenu/MainMenu'
 const Header = ({ title }) => (
-  <div className="instructions">
+  <div>
     <div>
       {/* <MainMenu></MainMenu> */}
     </div>

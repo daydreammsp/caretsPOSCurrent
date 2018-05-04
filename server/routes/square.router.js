@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 let request = require("request");
+const parseString = require('xml2js-parser').parseString;
 // let rp = require('request-promise');
 
 
@@ -294,5 +295,42 @@ router.post('/postcash', (req, res) => {
         } else {
             res.sendStatus(403);
         }
-    });//end router.get
+    });//end router
+
+router.get('/getWeather', (req, res) => {
+    let options = { method: 'GET',
+  url: 'http://api.wunderground.com/api/03fa8d24a90b1d6a/conditions/q/Mn/minneapolis.json',
+  headers: 
+   { 
+     'Cache-Control': 'no-cache' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+  res.send(body)
+ });
+});
+
+router.get('/getevents', (req, res) => {
+  let options = { method: 'GET',
+  url: 'http://api.eventful.com/rest/events/get',
+  qs: { app_key: 'HftNddnqvkw8xDhd', id: 'E0-001-000278174-6' },
+  headers: 
+   { 
+     'Cache-Control': 'no-cache',
+     Authorization: 'Basic Og==' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+  const xml = body;
+let events = parseString(xml, (err, result) => {
+  console.log(result);
+  res.send(result)
+});
+});
+});
+// eventful key HftNddnqvkw8xDhd
     module.exports = router;

@@ -6,7 +6,7 @@ import squareGetReducer from './squareGetReducer';
 import squareGetProducts from './getProductsReducer';
 import cashPayment from './cashPayment';
 import showReducer from './showReducer';
-
+import marketReducer from './marketReducer';
 const store = combineReducers({
   user,
   login,
@@ -14,7 +14,8 @@ const store = combineReducers({
   squareGetReducer,
   squareGetProducts,
   cashPayment,
-  showReducer
+  showReducer,
+  marketReducer
 });
 
 export default store;

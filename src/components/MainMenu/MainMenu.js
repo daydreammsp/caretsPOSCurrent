@@ -69,7 +69,7 @@ class MainMenu extends React.Component {
         <Divider />
         <List>
         <Link to="/CreateMarketDay">
-           <h2>Create Market Day</h2>
+           <h2>View Market Day</h2>
           </Link></List>
         <Divider />
         <List>

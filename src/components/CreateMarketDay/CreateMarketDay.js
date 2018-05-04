@@ -3,15 +3,23 @@ import MainMenu from '../MainMenu/MainMenu';
 import Nav from '../../components/Nav/Nav';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import NumberFormat from 'react-number-format';
+import Moment from 'react-moment';
+
 
 const mapStateToProps = state => ({
     user: state.user,
+    info: state.marketReducer
   });
 
-class CreateMarketDay extends React.Component {
+class TransactionHistory extends React.Component {
+
 
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({
+            type: 'MARKET_GET'
+          });
       }
     
       componentDidUpdate() {
@@ -21,12 +29,33 @@ class CreateMarketDay extends React.Component {
       }
 
     render() {
+      let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
+        return(
+            <h3 key={cash.id}>
+            <Moment format="YYYY/MM/DD">{cash.date}</Moment>
+            
+          {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
+        )
+      })
+    
+        let transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
+            return(
+                <h3 key={transaction.id}>
+                <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
+                
+              {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
+            )
+          })
         let content = null;
     
         if (this.props.user.userName) {
           content = (
+              
             <div>
-              <h2>Create Market Day</h2>
+              
+              <h2>View Market Day</h2>
+              {transactions}
+              {cashActions}
             </div>
           );
         }
@@ -42,4 +71,4 @@ class CreateMarketDay extends React.Component {
 
 
   
-  export default connect(mapStateToProps)(CreateMarketDay);
+  export default connect(mapStateToProps)(TransactionHistory);

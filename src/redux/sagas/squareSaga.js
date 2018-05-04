@@ -95,7 +95,29 @@ function* cashPaymentPost(action){
         
     } catch (error) {}
 }
-// 'POST_CASH'
+
+function* marketViewGet(action){
+    console.log('market view saga')
+    try {
+        const squareGet = yield call(axios.get, '/api/square/get');
+        const cashGet = yield call(axios.get, '/api/square/getcash');
+         const weatherGet = yield call(axios.get, '/api/square/getWeather');
+         const eventsGet = yield call(axios.get, '/api/square/getevents');
+        console.log(squareGet.data)
+        console.log(cashGet.data)
+        console.log(weatherGet.data)
+        console.log(eventsGet.data)
+        yield put({
+            type: 'MARKET_VIEW',
+            payload: {credit:squareGet.data.transactions,
+                        cash: cashGet.data,
+                    weather: weatherGet.data,
+                events: eventsGet.data}
+        })
+    } catch (error) {}
+}
+
+
 function* squareSaga() {
     yield takeEvery('POST_PRODUCT', squareNewProductPost);
     yield takeEvery('GET_TRANSACTIONS', squarePost);
@@ -105,6 +127,7 @@ function* squareSaga() {
     yield takeEvery('TOGGLE_CASH', toggleCashPage);
     yield takeEvery('TOTAL_CASH', cashTotalSaga);
     yield takeEvery('CASH_TRANSACTION', cashPaymentPost);
+    yield takeEvery('MARKET_GET', marketViewGet);
 }
 
 export default squareSaga;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MainMenu from '../MainMenu/MainMenu'
 
 const Nav = () => (
-  <div className="navbar">
+  <div>
     <div>
     <MainMenu></MainMenu>
       {/* <ul>
