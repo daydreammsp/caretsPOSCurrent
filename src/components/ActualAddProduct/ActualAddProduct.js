@@ -81,7 +81,7 @@ deleteProduct = (productId) => {
           <button onClick={this.handleClick}>Submit</button>
               <h2>show products</h2>
               {listProducts}
-              <pre>{JSON.stringify(this.props.products)}</pre>
+             
             </div>
           );
         }

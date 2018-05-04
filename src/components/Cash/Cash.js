@@ -68,17 +68,20 @@ submitTotal = (total)=>{
 //   }
 // }
   changeAmount = (amount) => {
-    console.log("click change amount")
+    amount 
+
+    console.log("click change amount",amount)
     this.setState({
       cashVal: amount
     })
   }
   render() {
+    let amountDue = (((this.props.cashPayment/100).toFixed(2) * .05) + parseInt((this.props.cashPayment/100).toFixed(2))).toFixed(2)
     let changeDue;
     if ((this.state.cashVal - (this.props.cashPayment/100) < 1 )){
       changeDue = 0;
     }else{
-      changeDue = this.state.cashVal - (this.props.cashPayment/100)
+      changeDue = this.state.cashVal - amountDue
     }
     
      
@@ -88,12 +91,12 @@ submitTotal = (total)=>{
         content = (
           <div>
             <h3>Amount Due</h3>
-            <h2>{(this.props.cashPayment/100).toFixed(2)}</h2>
+            <h2>{amountDue}</h2>
             {/* <input type='text'
             value={this.state.cashVal}
             placeholder='product'
             onChange={this.handleProductInput('product')}></input> */}
-            <Button onClick={()=>this.submitTotal((this.props.cashPayment/100))}>Submit Payment</Button>
+            <Button onClick={()=>this.submitTotal(amountDue)}>Submit Payment</Button>
             <h3>Change Due</h3>
             <h1>{(changeDue).toFixed(2)}</h1>
             <Button onClick={()=>this.changeAmount(10)}>10 Dollars</Button>
