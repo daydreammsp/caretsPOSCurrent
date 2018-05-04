@@ -11,7 +11,7 @@ function* squareGet(action){
         console.log(cashGet.data)
         yield put({
             type: 'DISPLAY_HISTORY',
-            payload: {credit:squareGet.data,
+            payload: {credit:squareGet.data.transactions,
                         cash: cashGet.data}
         })
     } catch (error) {}
@@ -50,10 +50,11 @@ function* squareNewProductPost(action){
         const productPost = yield call(axios.post, '/api/square/postproduct', action.payload);
         console.log('products',productPost.data)
         yield put({
-            type: 'GET_PRODUCTS',
-             payload: productPost.data
+            type: 'GET_PRODUCTS'
+             
         })
     } catch (error) {}
+    
 }
 
 //post request to trigger delete
@@ -62,8 +63,8 @@ function* deleteProduct(action){
     try {
         const deleteProduct = yield call(axios.post, '/api/square/deleteproduct', [action.payload]);
         yield put({
-            type: 'GET_PRODUCTS',
-            payload: deleteProduct.data
+            type: 'GET_PRODUCTS'
+            
         })
     } catch (error) {}
 }
@@ -96,11 +97,10 @@ function* cashPaymentPost(action){
 }
 // 'POST_CASH'
 function* squareSaga() {
-    
+    yield takeEvery('POST_PRODUCT', squareNewProductPost);
     yield takeEvery('GET_TRANSACTIONS', squarePost);
     yield takeEvery('GET_HISTORY', squareGet);
     yield takeEvery('GET_PRODUCTS', squareProductGet);
-    yield takeEvery('POST_PRODUCT', squareNewProductPost);
     yield takeEvery('DELETE_PRODUCT', deleteProduct);
     yield takeEvery('TOGGLE_CASH', toggleCashPage);
     yield takeEvery('TOTAL_CASH', cashTotalSaga);

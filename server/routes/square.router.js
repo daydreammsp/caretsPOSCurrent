@@ -191,9 +191,30 @@ router.post('/postproduct', (req, res) => {
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
-
-  console.log(body);
-  // res.send(body.objects)
+  else{
+    console.log(body)
+    let options1 = { method: 'POST',
+      url: 'https://connect.squareup.com/v2/catalog/search',
+      headers: 
+       { 
+         'Cache-Control': 'no-cache',
+         Accept: 'application/json',
+         Authorization: 'Bearer sq0atp--xOe6YM9OchfFi_-1UURRw',
+         'Content-Type': 'application/json' },
+      body: 
+       { object_types: [ 'ITEM' ],
+        //  query: { prefix_query: { attribute_name: 'name', attribute_prefix: 'tea' }
+        //  },
+         limit: 100 },
+      json: true };
+    
+    request(options1, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body);
+      res.send(body.objects)
+    });       
+    }
 });       
 });
 
@@ -211,8 +232,31 @@ router.post('/deleteproduct', (req, res) => {
 
 request(options, function (error, response, body){
   if (error) throw new Error(error);
+else{
+console.log(body)
+let options1 = { method: 'POST',
+  url: 'https://connect.squareup.com/v2/catalog/search',
+  headers: 
+   { 
+     'Cache-Control': 'no-cache',
+     Accept: 'application/json',
+     Authorization: 'Bearer sq0atp--xOe6YM9OchfFi_-1UURRw',
+     'Content-Type': 'application/json' },
+  body: 
+   { object_types: [ 'ITEM' ],
+    //  query: { prefix_query: { attribute_name: 'name', attribute_prefix: 'tea' }
+    //  },
+     limit: 100 },
+  json: true };
+
+request(options1, function (error, response, body) {
+  if (error) throw new Error(error);
 
   console.log(body);
+  res.send(body.objects)
+});       
+}
+  
 })
 })
 

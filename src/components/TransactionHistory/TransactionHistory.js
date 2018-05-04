@@ -30,8 +30,16 @@ class TransactionHistory extends React.Component {
       }
 
     render() {
+      let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
+        return(
+            <h3 key={cash.id}>
+            <Moment format="YYYY/MM/DD">{cash.date}</Moment>
+            
+          {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
+        )
+      })
     
-        let transactions = this.props.info.transactions && this.props.info.transactions.map( (transaction) => {
+        let transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
             return(
                 <h3 key={transaction.id}>
                 <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
@@ -45,9 +53,10 @@ class TransactionHistory extends React.Component {
           content = (
               
             <div>
+              
               <h2>Transaction History</h2>
               {transactions}
-              
+              {cashActions}
             </div>
           );
         }
