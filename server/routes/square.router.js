@@ -327,8 +327,8 @@ request(options, function (error, response, body) {
   console.log(body);
   const xml = body;
 let events = parseString(xml, (err, result) => {
-  console.log(result);
-  res.send(result)
+  console.log(result.event);
+  res.send(result.event.url)
 });
 });
 });
