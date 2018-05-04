@@ -84,3 +84,15 @@ mainMenu{
 .mainPage{
     background-image: url("../know-carrot-top-s-height-weight-4-1000x600.jpg");
 }
+.loginForm{
+    background: white;
+}
+.itemListItem{
+    outline-width: 2px;
+    outline-color: black;
+    outline-style: solid;
+    padding: 2px;
+    margin: 0 auto;
+    display: flex;   
+    flex-wrap: wrap-reverse;
+}

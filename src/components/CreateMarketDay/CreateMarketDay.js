@@ -29,13 +29,9 @@ class TransactionHistory extends React.Component {
       }
 
     render() {
-      // let events = this.props.info.events && this.props.info.events.map( (eventTime) => {
+      // let localEvents = this.props.info.events.event && this.props.info.events.event.map( (localEvent) => {
       //   return(
-      //     <h3>{eventTime.$.id}</h3>
-      //     //   <h3 key={.id}>
-      //     //   <Moment format="YYYY/MM/DD">{cash.date}</Moment>
-            
-      //     // {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
+      //     <h3>{localEvent}</h3>
       //   )
       // })
       let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
@@ -65,7 +61,8 @@ class TransactionHistory extends React.Component {
               <h2>View Market Day</h2>
               <a href={this.props.info.events}> click Me </a>
               <pre>{JSON.stringify(this.props.info.events)}</pre>
-              {/* {events} */}
+              <pre>{JSON.stringify(this.props.info.weather)}</pre>
+              {/* {localEvents} */}
               {transactions}
               {cashActions}
             </div>

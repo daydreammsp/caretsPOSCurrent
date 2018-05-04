@@ -53,6 +53,7 @@ class MainMenu extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
+      <h2>CARET^S</h2>
       <List>
         Welcome {this.props.user.userName}
       </List>
@@ -74,7 +75,7 @@ class MainMenu extends React.Component {
         <Divider />
         <List>
         <Link to="/ActualAddProduct">
-           <h2>ActualAddProduct</h2>
+           <h2>Add Product</h2>
           </Link></List>
         <Divider />
         
@@ -87,9 +88,9 @@ class MainMenu extends React.Component {
 
     return (
       <div>
-        <i className="material-icons md-48">menu</i>
+        
         <Button onClick={this.toggleDrawer('left', true)}>
-        <h1>Caret^s</h1></Button>
+        <h1><i className="material-icons md-48">menu</i></h1></Button>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
           <div
             tabIndex={0}

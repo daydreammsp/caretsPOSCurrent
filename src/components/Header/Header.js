@@ -1,9 +1,8 @@
 import React from 'react';
-import MainMenu from '../MainMenu/MainMenu'
-const Header = ({ title }) => (
+
+const Header = ({}) => (
   <div>
     <div>
-      {/* <MainMenu></MainMenu> */}
     </div>
   </div>
 );

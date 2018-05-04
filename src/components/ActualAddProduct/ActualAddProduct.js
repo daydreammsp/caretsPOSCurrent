@@ -3,6 +3,7 @@ import MainMenu from '../MainMenu/MainMenu';
 import Nav from '../../components/Nav/Nav';
 import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import Button from 'material-ui/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -58,9 +59,9 @@ deleteProduct = (productId) => {
     //'DELETE_PRODUCT'
         let listProducts = this.props.products.map( (product) => {
             return(
-               <div> <span>{product.item_data.name}</span> 
+               <div className="itemListItem"> <span>{product.item_data.name}</span> 
                <strong>{product.item_data.description}</strong>
-               <button onClick={()=>{this.deleteProduct(product.id)}}>Delete</button>
+               <Button variant="raised" onClick={()=>{this.deleteProduct(product.id)}}><h3>Delete</h3></Button>
                </div>
             )
           })
@@ -80,7 +81,7 @@ deleteProduct = (productId) => {
 
           <button onClick={this.handleClick}>Submit</button>
               <h2>show products</h2>
-              {listProducts}
+              <h3>{listProducts}</h3>
              
             </div>
           );

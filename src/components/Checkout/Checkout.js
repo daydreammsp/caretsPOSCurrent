@@ -92,6 +92,16 @@ class Checkout extends React.Component {
          amount: this.state.amount
              });
       }
+      handlePriceClickMinus = (price) =>{
+        this.state.amount = this.state.amount - price
+        if(this.state.amount < 1){
+          this.state.amount = 0
+        }
+       console.log("click price", this.state.amount)
+       this.setState({
+        amount: this.state.amount
+            });
+     }
 
     render() {
       
@@ -102,8 +112,12 @@ class Checkout extends React.Component {
       
       let listProducts = this.props.products.map( (product) => {
         return(
-           <div key={product.id}> <Button variant="raised" color="primary" className={classes.button} 
-           onClick={()=>this.handlePriceClick(product.item_data.variations[0].item_variation_data.price_money.amount)}><div>{product.item_data.name} 
+           <div key={product.id}> 
+           <Button  variant="raised" color="seconary"
+           onClick={()=>this.handlePriceClickMinus(product.item_data.variations[0].item_variation_data.price_money.amount)}>
+           <h1>-</h1></Button>
+           <Button variant="raised" color="primary" className={classes.button} 
+           onClick={()=>this.handlePriceClick(product.item_data.variations[0].item_variation_data.price_money.amount)}><div><h1>{product.item_data.name}</h1> 
            {(product.item_data.variations[0].item_variation_data.price_money.amount/100).toFixed(2)}</div>
                 </Button>
            </div>

@@ -6,28 +6,6 @@ const Nav = () => (
   <div>
     <div>
     <MainMenu></MainMenu>
-      {/* <ul>
-        <li>
-          <Link to="/user">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/AddProduct">
-           Add Product
-          </Link>
-        </li>
-        <li>
-          <Link to="/AddLocation">
-           Add Location
-          </Link>
-        </li> */}
-        {/* <li>
-          <Link to="/CreateMarketDay">
-           Create Market Day
-          </Link>
-        </li> */}
-      {/* </ul> */}
     </div>
   </div>
 );

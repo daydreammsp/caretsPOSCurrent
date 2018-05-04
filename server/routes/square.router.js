@@ -81,7 +81,7 @@ router.get('/get', (req, res) => {
             //     country: 'US',
             //     first_name: 'Jane',
             //     last_name: 'Doe' },
-             redirect_url: 'http://localhost:3000/Checkout' },
+             redirect_url: 'http://localhost:3000/CheckoutMain' },
           json: true };
         
         request(options, function (error, response, body) {
@@ -314,7 +314,7 @@ request(options, function (error, response, body) {
 
 router.get('/getevents', (req, res) => {
   let options = { method: 'GET',
-  url: 'http://api.eventful.com/rest/events/get',
+  url: 'http://api.eventful.com/rest/events/search?app_key=HftNddnqvkw8xDhd&location=San+Diego&date=Future',
   qs: { app_key: 'HftNddnqvkw8xDhd', id: 'E0-001-000278174-6' },
   headers: 
    { 
@@ -324,11 +324,11 @@ router.get('/getevents', (req, res) => {
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
 
-  console.log(body);
+  
   const xml = body;
 let events = parseString(xml, (err, result) => {
-  console.log(result.event);
-  res.send(result.event.url)
+  console.log(result.search.events[0]);
+  res.send(result.search.events[0])
 });
 });
 });
