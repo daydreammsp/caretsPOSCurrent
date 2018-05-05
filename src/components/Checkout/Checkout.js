@@ -33,8 +33,7 @@ const mapStateToProps = state => ({
 class Checkout extends React.Component {
 
     state = {
-      totalIn: [],
-      amount: 0,
+      totalIn: 0,
         itemsArr: []
       }
 
@@ -56,14 +55,7 @@ class Checkout extends React.Component {
           this.props.history.push('home');
         }
       }
-      // handleAmountChange = (inputText) => {
-      //   return (event) => {
-      //     console.log(inputText)
-      //     this.setState({
-      //       [inputText]: event.target.value
-      //     });
-      //   }
-      // }
+      
  cashPayment = (cash)=> {
    
         this.props.dispatch({
@@ -77,10 +69,10 @@ class Checkout extends React.Component {
       }
 
       handleClick = () => {
-        console.log('clicked!', this.state.amount)
+        console.log('clicked!', this.state.totalIn)
         this.props.dispatch({
           type: 'GET_TRANSACTIONS',
-          payload: this.state
+          payload: this.state.totalIn
         });
       }
 
@@ -92,7 +84,7 @@ class Checkout extends React.Component {
          this.state.itemsArr.push(product)
         console.log("click itemsArr", this.state.itemsArr)
         this.setState({
-         amount: totalIn
+         amount: this.state.totalIn
              });
       }
       handlePriceClickMinus = (product) =>{
@@ -103,7 +95,7 @@ class Checkout extends React.Component {
         console.log(this.state.itemsArr)
          
        this.setState({
-        amount: totalIn
+        amount: this.totalIn
             });
      }
 add(a,b){
@@ -114,15 +106,17 @@ return parseInt(a)+ parseInt(b)
       const { classes } = this.props;
       
 
-       let totalIn = this.state.itemsArr.map( (price) => {
+        this.state.totalIn = this.state.itemsArr.map( (price) => {
           return(
             (parseInt(price.item_data.description/100).toFixed(2))
           )
       })
-      if (totalIn.length > 1){
-        totalIn = totalIn.reduce(this.add)
+      if (this.state.totalIn.length > 1){
+        this.state.totalIn = this.state.totalIn.reduce(this.add)
       }
-      
+      if(this.state.itemsArr.length < 1){
+        this.state.totalIn = 0
+      }
       let listProducts = this.props.products.map( (product) => {
         return(
            <div key={product.id}> 
@@ -146,17 +140,17 @@ return parseInt(a)+ parseInt(b)
           content = (
             <div>
               <h2>Checkout</h2>
-             {totalIn}
+             <h1>{this.state.totalIn}</h1>
               {/* <pre>{JSON.stringify(this.props.cashPayment)}</pre> */}
-              <NumberFormat value={((this.state.amount/100).toFixed(2))} displayType={'text'} 
+              {/* <NumberFormat value={((this.state.totalIn).toFixed(2))} displayType={'text'} 
               
               thousandSeparator={true} prefix={'$'}
-              renderText={value => <div>{value}</div>} />
+              renderText={value => <div>{value}</div>} /> */}
               {/* <h1>{this.state.amount}</h1> */}
               {/* <input type='text'
             placeholder='amount'
             onChange={this.handleAmountChange('amount')}></input><br></br> */}
-          <Button variant="raised" className={classes.button} onClick={()=>this.cashPayment(this.state.amount)}>Cash</Button>
+          <Button variant="raised" className={classes.button} onClick={()=>this.cashPayment(this.state.totalIn)}>Cash</Button>
           <Button variant="raised" className={classes.button} onClick={this.handleClick}>Credit</Button>
           {listProducts}
          

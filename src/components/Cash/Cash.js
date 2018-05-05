@@ -76,9 +76,10 @@ submitTotal = (total)=>{
     })
   }
   render() {
-    let amountDue = (((this.props.cashPayment/100).toFixed(2) * .05) + parseInt((this.props.cashPayment/100).toFixed(2))).toFixed(2)
+    // let amountDue = (((this.props.cashPayment/100).toFixed(2) * .05) + parseInt((this.props.cashPayment/100).toFixed(2))).toFixed(2)
+    let amountDue = this.props.cashPayment
     let changeDue;
-    if ((this.state.cashVal - (this.props.cashPayment/100) < 1 )){
+    if ((this.state.cashVal - (this.props.cashPayment) < 1 )){
       changeDue = 0;
     }else{
       changeDue = this.state.cashVal - amountDue
