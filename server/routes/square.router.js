@@ -122,7 +122,7 @@ router.post('/postproduct', (req, res) => {
   console.log(req.body)
   let name = req.body.name;
   let description = req.body.description;
-  let price = parseInt(req.body.price);
+  let price = req.body.price;
   let randomNum = Math.floor(Math.random() * 1000);
    let options = { method: 'POST',
   url: 'https://connect.squareup.com/v2/catalog/object',
@@ -140,7 +140,7 @@ router.post('/postproduct', (req, res) => {
         item_data: 
          { name: name,
            description: description,
-           abbreviation: 'Ch',
+           abbreviation: price,
            price_money: { amount: price, currency: 'USD' } } } },
   json: true };
 

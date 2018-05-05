@@ -88,7 +88,7 @@ deleteProduct = (productId) => {
         let listProducts = this.props.products.map( (product) => {
             return(
                <div className="itemListItem"> <span>{product.item_data.name}</span> 
-               <strong>{product.item_data.description}</strong>
+               {/* <strong>{product.item_data.description}</strong> */}
                {/* <Button variant="raised" onClick={()=>{this.deleteProduct(product.id)}}><h3>Delete</h3></Button> */}
                <Tooltip id="tooltip-icon" title="Delete">
         <IconButton aria-label="Delete">
