@@ -20,8 +20,8 @@ function* squareGet(action){
 function* squarePost(action) {
     console.log('in postSaga')
     try {
-        console.log('ACTION HERE', action)
-        const postTransaction = yield call(axios.post, '/api/square', action.payload);
+        console.log('ACTION HERE', action.payload)
+        const postTransaction = yield call(axios.post, '/api/square', [action.payload]);
         console.log('post transaction', postTransaction.data);
         yield put({
             type: 'DISPLAY_TRANSACTIONS',

@@ -31,8 +31,8 @@ router.get('/get', (req, res) => {
 
     router.post('/', (req, res) => {
         let randomNum = Math.floor(Math.random() * 1000);
-        console.log(req.body.amount)
-        let totalAmount = parseInt(req.body.amount)
+        console.log(req.body)
+        let totalAmount = parseInt(req.body * 100)
         let options = { method: 'POST',
           url: 'https://connect.squareup.com/v2/locations/CBASEGcVZgUKS8RbqdkU-YjiBxggAQ/checkouts',
           headers: 
@@ -46,7 +46,7 @@ router.get('/get', (req, res) => {
              order: 
               { reference_id: 'reference_id',
                 line_items: 
-                 [ { name: 'Printed T Shirt',
+                 [ { name: 'Total',
                      quantity: '1',
                      base_price_money: { amount: totalAmount, currency: 'USD' },
                 //      discounts: 

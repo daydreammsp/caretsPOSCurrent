@@ -9,6 +9,7 @@ import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import NumberFormat from 'react-number-format';
 import Cash from '../Cash/Cash';
+import CurrentTransaction from '../CurrentTransaction/CurrentTransaction';
 
 
 
@@ -139,6 +140,7 @@ return parseInt(a)+ parseInt(b)
         if (this.props.user.userName) {
           content = (
             <div>
+              <CurrentTransaction itemsArr={this.state.itemsArr}/>
               <h2>Checkout</h2>
              <h1>{this.state.totalIn}</h1>
               {/* <pre>{JSON.stringify(this.props.cashPayment)}</pre> */}

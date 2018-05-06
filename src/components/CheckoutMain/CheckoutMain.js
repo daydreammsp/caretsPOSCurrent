@@ -12,6 +12,7 @@ import Cash from '../Cash/Cash';
 import Checkout from '../Checkout/Checkout';
 
 
+
 const mapStateToProps = state => ({
     user: state.user,
     url: state.squareReducer,
@@ -59,6 +60,7 @@ class CheckoutMain extends React.Component {
         return (
           <div>
             <Nav />
+            
             { content }
         
           </div>
