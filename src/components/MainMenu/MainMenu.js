@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import compose from 'recompose/compose';
+import MenuModal from '../MenuModal/MenuModal'
+
+
 
 const mapStateToProps = state => ({
   user: state.user,
@@ -21,6 +24,7 @@ const styles = {
   list: {
     minwidth: 250,
     padding: 8,
+    backgroundColor: '#E4E4E3',
   },
   largeIcon: {
     width: 60,
@@ -58,29 +62,30 @@ class MainMenu extends React.Component {
         Welcome {this.props.user.userName}
       </List>
         <List> 
-        <Link to="/CheckoutMain">
-           <h2>Checkout</h2>
+        <Link className="navMenu" to="/CheckoutMain">
+           <Button><h3>Checkout</h3></Button>
           </Link>
         </List>
         <Divider />
         <List>
-        <Link to="/TransactionHistory">
-           <h2>Transactions</h2>
+        <Link className="navMenu" to="/TransactionHistory">
+           <Button><h3>Transactions</h3></Button>
           </Link></List>
         <Divider />
         <List>
-        <Link to="/CreateMarketDay">
-           <h2>View Market Day</h2>
+        <Link className="navMenu" to="/CreateMarketDay">
+        <Button><h3>View Market Day</h3></Button>
+        
           </Link></List>
         <Divider />
         <List>
-        <Link to="/ActualAddProduct">
-           <h2>Add Product</h2>
+        <Link className="navMenu" to="/ActualAddProduct">
+        <Button><h3>Add Product</h3></Button>
           </Link></List>
         <Divider />
         
         <List>
-          <h2 onClick={()=>{this.logout()}}>Logout</h2></List>
+          <h2 className="navMenu" onClick={()=>{this.logout()}}>Logout</h2></List>
       </div>
     );
 

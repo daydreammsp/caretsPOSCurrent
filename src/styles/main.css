@@ -100,3 +100,11 @@ checkout{
     margin: 0 auto;
     padding: 5;
 }
+.navMenu{
+color: black;
+text-decoration: none;
+}
+.navMenu:visited {
+    color: black;
+    text-decoration: none;
+}

@@ -124,8 +124,8 @@ editClickFill=(product)=>{
           editPrice: product.item_data.abbreviation
   })
 }
-showAddForm = ()=>{
-  this.addForm = !this.addform
+showAddForm = (change)=>{
+   this.addForm = change
   this.setState({
     addForm: this.addForm
   })
@@ -185,11 +185,7 @@ console.log(this.addForm)
                
                   </Typography>
                   <Typography>
-                <Tooltip id="tooltip-icon" title="Delete">
-               <IconButton aria-label="Delete">
-                <DeleteIcon onClick={()=>{this.deleteProduct(product.id)}}/>
-                </IconButton>
-                 </Tooltip>
+                
                  </Typography>
                 </ExpansionPanelSummary>
                 
@@ -220,14 +216,15 @@ console.log(this.addForm)
                   </Typography>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
-              
+              <div>
+              <Tooltip id="tooltip-icon" title="Delete">
+               <IconButton aria-label="Delete">
+                <DeleteIcon onClick={()=>{this.deleteProduct(product.id)}}/>
+                </IconButton>
+                 </Tooltip>
+                 </div>
             </div>
              
-      
-                
-               
-               
-          
             )
           })
         
@@ -237,7 +234,7 @@ console.log(this.addForm)
           content = (
               
             <div>
-                <Button variant="raised" color="primary" onClick={this.showAddForm}>
+                <Button variant="raised" color="primary" onClick={()=>this.showAddForm(!this.addform)}>
                 <h2>add product</h2></Button>
                 {this.addForm && showForm}
           {/* <input type='text'

@@ -121,7 +121,7 @@ return parseInt(a)+ parseInt(b)
       let listProducts = this.props.products.map( (product) => {
         return(
            <div key={product.id}> 
-           <Button  variant="raised" color="seconary"
+           <Button  variant="raised" color="secondary"
            onClick={()=>this.handlePriceClickMinus(product)}>
            <h1>-</h1></Button>
            <Button variant="raised" color="primary" className={classes.button} 
@@ -153,8 +153,8 @@ return parseInt(a)+ parseInt(b)
               {/* <input type='text'
             placeholder='amount'
             onChange={this.handleAmountChange('amount')}></input><br></br> */}
-          <Button variant="raised" className={classes.button} onClick={()=>this.cashPayment(this.state.totalIn)}>Cash</Button>
-          <Button variant="raised" className={classes.button} onClick={this.handleClick}>Credit</Button>
+          <Button variant="raised" color="primary" className={classes.button} onClick={()=>this.cashPayment(this.state.totalIn)}>Cash</Button>
+          <Button variant="raised" color="primary" className={classes.button} onClick={this.handleClick}>Credit</Button>
           {listProducts}
          
             </div>
