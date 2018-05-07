@@ -57,7 +57,8 @@ constructor(props){
         price: '',
         editName: '',
         editDescription: '',
-        editPrice: ''
+        editPrice: '',
+        addForm: false
       
       
       }
@@ -106,6 +107,7 @@ handleClick = () => {
           description: '',
           price: ''
         })
+        this.addForm = !this.addForm
       }
 deleteProduct = (productId) => {
     console.log(productId)
@@ -121,6 +123,14 @@ editClickFill=(product)=>{
           editDescription: product.item_data.description,
           editPrice: product.item_data.abbreviation
   })
+}
+showAddForm = ()=>{
+  this.addForm = !this.addform
+  this.setState({
+    addForm: this.addForm
+  })
+
+console.log(this.addForm)
 }
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
@@ -139,29 +149,50 @@ editClickFill=(product)=>{
       
     render() {
       const { classes } = this.props;
-    //'DELETE_PRODUCT'
+   
+      let showForm = (
+          <div>
+          <TextField
+                 value={this.state.name} type='text'
+                placeholder='Name'
+                onChange={this.handleProductInput('name')}/>
+              
+            <TextField value={this.state.description} type='text'
+            placeholder='Price $3.00'
+            onChange={this.handleProductInput('description')}/>
+            <TextField  value={this.state.price} type='text'
+            placeholder='Description'
+            onChange={this.handleProductInput('price')}/>
+            <button onClick={this.handleClick}>Submit</button>
+            </div>
+        )
+      
     let listProducts=[];
    
         listProducts = this.props.products.map( (product) => {
             return(
               <div className={classes.root}>
               <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<EditIcon onClick={()=>this.editClickFill(product)}/>}>
+                
+                <ExpansionPanelSummary 
+                expandIcon={<EditIcon onClick={()=>this.editClickFill(product)}/>}>
+                
                   <Typography className={classes.heading}>
                   
-                  <span>{product.item_data.name}</span> 
+                  <span>{product.item_data.name}   </span> 
                 <strong>{product.item_data.description}</strong> 
                {/* <Button variant="raised" onClick={()=>{this.deleteProduct(product.id)}}><h3>Delete</h3></Button> */}
-               <Tooltip id="tooltip-icon" title="Delete">
-        <IconButton aria-label="Delete">
-          <DeleteIcon 
-          onClick={()=>{this.deleteProduct(product.id)}}
-          />
-          
-        </IconButton>
-      </Tooltip>
+               
                   </Typography>
+                  <Typography>
+                <Tooltip id="tooltip-icon" title="Delete">
+               <IconButton aria-label="Delete">
+                <DeleteIcon onClick={()=>{this.deleteProduct(product.id)}}/>
+                </IconButton>
+                 </Tooltip>
+                 </Typography>
                 </ExpansionPanelSummary>
+                
                 <ExpansionPanelDetails>
                   <Typography>
                     <div>
@@ -206,23 +237,14 @@ editClickFill=(product)=>{
           content = (
               
             <div>
-                <h2>add product</h2>
-                <TextField
-                 value={this.state.name} type='text'
-                placeholder='Name'
-                onChange={this.handleProductInput('name')}/>
-              
-            <TextField value={this.state.description} type='text'
-            placeholder='Price $3.00'
-            onChange={this.handleProductInput('description')}/>
-            <TextField  value={this.state.price} type='text'
-            placeholder='Description'
-            onChange={this.handleProductInput('price')}/>
+                <Button variant="raised" color="primary" onClick={this.showAddForm}>
+                <h2>add product</h2></Button>
+                {this.addForm && showForm}
           {/* <input type='text'
             placeholder='absolute url'
             onChange={this.handleImgChange('image_url')}></input> */}
 
-          <button onClick={this.handleClick}>Submit</button>
+          
              
               <h3>{listProducts}</h3>
              
