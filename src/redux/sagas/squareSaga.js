@@ -116,7 +116,19 @@ function* marketViewGet(action){
         })
     } catch (error) {}
 }
-
+//'POST_PRODUCT_EDIT'
+function* productEditPost(action){
+    console.log('post edit product')
+    try {
+        const productedit = yield call(axios.post, '/api/square/productedit', action.payload);
+        console.log('products',productedit.data)
+        yield put({
+            type: 'GET_PRODUCTS'
+             
+        })
+    } catch (error) {}
+    
+}
 
 function* squareSaga() {
     yield takeEvery('POST_PRODUCT', squareNewProductPost);
@@ -128,6 +140,7 @@ function* squareSaga() {
     yield takeEvery('TOTAL_CASH', cashTotalSaga);
     yield takeEvery('CASH_TRANSACTION', cashPaymentPost);
     yield takeEvery('MARKET_GET', marketViewGet);
+    yield takeEvery('POST_PRODUCT_EDIT', productEditPost);
 }
 
 export default squareSaga;

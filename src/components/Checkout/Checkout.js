@@ -109,7 +109,7 @@ return parseInt(a)+ parseInt(b)
 
         this.state.totalIn = this.state.itemsArr.map( (price) => {
           return(
-            (parseInt(price.item_data.description/100).toFixed(2))
+            (parseInt(price.item_data.description).toFixed(2))
           )
       })
       if (this.state.totalIn.length > 1){
@@ -128,7 +128,7 @@ return parseInt(a)+ parseInt(b)
            onClick={()=>this.handlePriceClick(product)}>
            <div>
              <h1>{product.item_data.name}</h1> 
-           {(parseInt(product.item_data.description/100)).toFixed(2)}
+           {(parseInt(product.item_data.description)).toFixed(2)}
            </div>
                 </Button>
            </div>
@@ -139,10 +139,11 @@ return parseInt(a)+ parseInt(b)
     
         if (this.props.user.userName) {
           content = (
-            <div>
+            <div className="checkout"> <Button variant="raised" color="primary">
               <CurrentTransaction itemsArr={this.state.itemsArr}/>
-              <h2>Checkout</h2>
-             <h1>{this.state.totalIn}</h1>
+              </Button>
+              {/* <h2>Checkout</h2> */}
+             <h1>$ {this.state.totalIn}</h1>
               {/* <pre>{JSON.stringify(this.props.cashPayment)}</pre> */}
               {/* <NumberFormat value={((this.state.totalIn).toFixed(2))} displayType={'text'} 
               

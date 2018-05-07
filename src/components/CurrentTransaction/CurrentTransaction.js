@@ -17,6 +17,7 @@ const styles = {
   },
   fullList: {
     width: 'auto',
+    margin: 0,
   },
 };
 
@@ -33,7 +34,7 @@ class CurrentTransaction extends React.Component {
       [side]: open,
     });
   };
-
+  
   render() {
     const { classes } = this.props;
 
@@ -47,17 +48,12 @@ class CurrentTransaction extends React.Component {
     
     let dropDownList = this.props.itemsArr.map( (item) => {
         return(
-            <div className={classes.FullList}>{item.item_data.name}</div>
-      
-            
+            <div >
+            <div className={classes.FullList}><h2>{item.item_data.name} {(parseInt(item.item_data.description)).toFixed(2)}</h2></div>
+            </div>
         )
     })
-    // const fullList = (
-    //   <div className={classes.fullList}>
-    //     {dropDownList}
-    //   </div>
-    // );
-
+    
     return (
       <div>
         <Button onClick={this.toggleDrawer('top', true)}>Current Transaction</Button>
@@ -69,8 +65,11 @@ class CurrentTransaction extends React.Component {
             onKeyDown={this.toggleDrawer('top', false)}
           >
             {dropDownList}
+            
+            
           </div>
         </Drawer>
+       
       </div>
     );
   }

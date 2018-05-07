@@ -96,3 +96,7 @@ mainMenu{
     display: flex;   
     flex-wrap: wrap-reverse;
 }
+checkout{
+    margin: 0 auto;
+    padding: 5;
+}

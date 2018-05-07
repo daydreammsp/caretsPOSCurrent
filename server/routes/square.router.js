@@ -133,16 +133,20 @@ router.post('/postproduct', (req, res) => {
      Authorization: 'Bearer sq0atp--xOe6YM9OchfFi_-1UURRw',
      'Content-Type': 'application/json' },
   body: 
-   { idempotency_key: 'af3d1afc-7212-4300-b463-0bfc5314a5a22'+ randomNum,
-     object: 
-      { type: 'ITEM',
-        id: '#Cocoa',
-        item_data: 
-         { name: name,
-           description: description,
-           abbreviation: price,
-           price_money: { amount: price, currency: 'USD' } } } },
-  json: true };
+  { idempotency_key: 'af3d1afc-7212-4300-b463-0bfc531489898e' + randomNum,
+  object: 
+   { type: 'ITEM',
+     id: "#Cocoa",
+     updated_at: '2018-05-07T14:51:33.869Z',
+     version: 1,
+     is_deleted: false,
+     present_at_all_locations: true,
+     item_data: 
+      { name: name,
+        description: description,
+        abbreviation: price,
+        product_type: 'REGULAR' } } },
+json: true };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
@@ -287,4 +291,68 @@ let events = parseString(xml, (err, result) => {
 });
 });
 // eventful key HftNddnqvkw8xDhd
+
+
+router.post('/productedit', (req, res) => {
+  console.log(req.body)
+  let productId = req.body.productId;
+  let version = req.body.version;
+  let name = req.body.name;
+  let description = req.body.description;
+  let price = req.body.price;
+  // let editId = req.body.editId
+  let randomNum = Math.floor(Math.random() * 1000);
+   let options = { method: 'POST',
+  url: 'https://connect.squareup.com/v2/catalog/object',
+  headers: 
+   { 
+     'Cache-Control': 'no-cache',
+     Accept: 'application/json',
+     Authorization: 'Bearer sq0atp--xOe6YM9OchfFi_-1UURRw',
+     'Content-Type': 'application/json' },
+     
+     body: 
+     { idempotency_key: 'af3d1afc-7212-4300-b463-0bfc531489898e' + randomNum,
+       object: 
+        { type: 'ITEM',
+          id: productId,
+          updated_at: '2018-05-07T14:51:33.869Z',
+          version: version,
+          is_deleted: false,
+          present_at_all_locations: true,
+          item_data: 
+           { name: name,
+             description: description,
+             abbreviation: price,
+             product_type: 'REGULAR' } } },
+    json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+  else{
+    console.log(body)
+    let options1 = { method: 'POST',
+      url: 'https://connect.squareup.com/v2/catalog/search',
+      headers: 
+       { 
+         'Cache-Control': 'no-cache',
+         Accept: 'application/json',
+         Authorization: 'Bearer sq0atp--xOe6YM9OchfFi_-1UURRw',
+         'Content-Type': 'application/json' },
+      body: 
+       { object_types: [ 'ITEM' ],
+        //  query: { prefix_query: { attribute_name: 'name', attribute_prefix: 'tea' }
+        //  },
+         limit: 100 },
+      json: true };
+    
+    request(options1, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      console.log(body);
+      res.send(body.objects)
+    });       
+    }
+});       
+});
     module.exports = router;
