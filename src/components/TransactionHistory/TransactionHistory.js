@@ -30,15 +30,27 @@ const mapStateToProps = state => ({
   });
 
 class TransactionHistory extends React.Component {
+  
   // constructor(props){
   //   super(props)
   // }
   state = {
       
     date: "2018-05-24",
+    sortedDateCredit: [],
+    sortedDateCash: []
     
   
-  
+  }
+  filterTransactions = (newDate)=>{
+
+    let dateVar = newDate
+    const dateSortCredit = (item => item.created_at.split('T')[0] === dateVar );
+         this.state.sortedDateCredit = this.props.info.credit.filter(dateSortCredit);
+         console.log('credit',this.state.sortedDateCredit)
+    const dateSortCash = (item => item.date.split('T')[0] === dateVar );
+    this.state.sortedDateCash = this.props.info.cash.filter(dateSortCash)
+            console.log('cash',this.state.sortedDateCash)
   }
   handleDateInput = (inputText) => {
     return (event) => {
@@ -47,6 +59,7 @@ class TransactionHistory extends React.Component {
       this.setState({
         [inputText]: event.target.value
       });
+      this.filterTransactions(event.target.value)
     }
   }
     componentDidMount() {
@@ -65,7 +78,7 @@ class TransactionHistory extends React.Component {
 
     render() {
       const { classes } = this.props;
-      let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
+      let cashActions = this.state.sortedDateCash.map( (cash) => {
         return(
             <h3 key={cash.id}>
             <Moment format="YYYY/MM/DD">{cash.date}</Moment>
@@ -73,9 +86,8 @@ class TransactionHistory extends React.Component {
           {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
         )
       })
-         // const dateSort = (item => item.created_at === this.state.date);
-          //   creditTransactions.filter(dateSort)
-       let creditTransactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
+         
+        let filteredTransactions = this.state.sortedDateCredit.map( (transaction) => {
             return(
                 <h3 key={transaction.id}>
                 <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
@@ -84,7 +96,7 @@ class TransactionHistory extends React.Component {
             )
           })
          
-          console.log(creditTransactions)
+          
         let content = null;
     
         if (this.props.user.userName) {
@@ -93,7 +105,7 @@ class TransactionHistory extends React.Component {
             <div>
               
               <h2>Transaction History</h2>
-              <form className={classes.container} noValidate> 
+              {/* <form className={classes.container} noValidate>  */}
               
        <TextField
         id="date"
@@ -107,8 +119,9 @@ class TransactionHistory extends React.Component {
         }}
         onChange={this.handleDateInput('date')}
       /> 
-     </form> 
-              {creditTransactions}
+     {/* </form>  */}
+             
+             {filteredTransactions}
               {cashActions}
             </div>
           );
