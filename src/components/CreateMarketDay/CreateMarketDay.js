@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import NumberFormat from 'react-number-format';
 import Moment from 'react-moment';
+import MenuModal from '../MenuModal/MenuModal'
 
 
 const mapStateToProps = state => ({
@@ -13,13 +14,21 @@ const mapStateToProps = state => ({
   });
 
 class TransactionHistory extends React.Component {
-
+  state = {
+    open: true,
+  };
+  handleOpen = () => {
+    this.setState({ open: true });
+  
+  };
 
     componentDidMount() {
+      
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({
             type: 'MARKET_GET'
           });
+
       }
     
       componentDidUpdate() {
@@ -34,6 +43,11 @@ class TransactionHistory extends React.Component {
       //     <h3>{localEvent}</h3>
       //   )
       // })
+      
+         
+        
+      
+      
       let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
         return(
             <h3 key={cash.id}>
@@ -59,10 +73,12 @@ class TransactionHistory extends React.Component {
             <div>
               
               <h2>View Market Day</h2>
+              
               <a href={this.props.info.events}> click Me </a>
               <pre>{JSON.stringify(this.props.info.events)}</pre>
               <pre>{JSON.stringify(this.props.info.weather)}</pre>
               {/* {localEvents} */}
+              <MenuModal/>
               {transactions}
               {cashActions}
             </div>
