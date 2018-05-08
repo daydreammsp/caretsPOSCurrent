@@ -46,8 +46,11 @@ class TransactionHistory extends React.Component {
 
     let dateVar = newDate
     const dateSortCredit = (item => item.created_at.split('T')[0] === dateVar );
+    
          this.state.sortedDateCredit = this.props.info.credit.filter(dateSortCredit);
          console.log('credit',this.state.sortedDateCredit)
+
+
     const dateSortCash = (item => item.date.split('T')[0] === dateVar );
     this.state.sortedDateCash = this.props.info.cash.filter(dateSortCash)
             console.log('cash',this.state.sortedDateCash)

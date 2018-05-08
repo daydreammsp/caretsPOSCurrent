@@ -97,12 +97,17 @@ function* cashPaymentPost(action){
 }
 
 function* marketViewGet(action){
-    console.log('market view saga')
+    // marketName: '',
+    // address: '',
+    // city: '',
+    // state: '',
+    // date: ''
+    
     try {
         const squareGet = yield call(axios.get, '/api/square/get');
         const cashGet = yield call(axios.get, '/api/square/getcash');
-         const weatherGet = yield call(axios.get, '/api/square/getWeather');
-         const eventsGet = yield call(axios.get, '/api/square/getevents');
+         const weatherGet = yield call(axios.post, '/api/square/getWeather', action.payload);
+         const eventsGet = yield call(axios.post, '/api/square/getevents', action.payload);
         console.log(squareGet.data)
         console.log(cashGet.data)
         console.log(weatherGet.data)

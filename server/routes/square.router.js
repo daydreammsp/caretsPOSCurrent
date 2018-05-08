@@ -23,7 +23,7 @@ router.get('/get', (req, res) => {
     request(options, function (error, response, body) {
       if (error) throw new Error(error);
     
-      console.log(body);
+      // console.log(body);
       
       res.send(body)
     });
@@ -87,7 +87,7 @@ router.get('/get', (req, res) => {
         request(options, function (error, response, body) {
           if (error) throw new Error(error);
         
-          console.log(body);
+          // console.log(body);
           
         res.send(body.checkout.checkout_page_url)
         });
@@ -113,13 +113,13 @@ router.post('/getproducts', (req, res) => {
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
 
-  console.log(body);
+  // console.log(body);
   res.send(body.objects)
 });       
 });
 
 router.post('/postproduct', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   let name = req.body.name;
   let description = req.body.description;
   let price = req.body.price;
@@ -151,7 +151,7 @@ json: true };
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
   else{
-    console.log(body)
+    // console.log(body)
     let options1 = { method: 'POST',
       url: 'https://connect.squareup.com/v2/catalog/search',
       headers: 
@@ -170,7 +170,7 @@ request(options, function (error, response, body) {
     request(options1, function (error, response, body) {
       if (error) throw new Error(error);
     
-      console.log(body);
+      // console.log(body);
       res.send(body.objects)
     });       
     }
@@ -179,7 +179,7 @@ request(options, function (error, response, body) {
 
 router.post('/deleteproduct', (req, res) => {
   let productId = req.body
-  console.log(productId)
+  // console.log(productId)
   let options = { method: 'DELETE',
   url: 'https://connect.squareup.com/v2/catalog/object/'+ productId,
   headers: 
@@ -211,7 +211,7 @@ let options1 = { method: 'POST',
 request(options1, function (error, response, body) {
   if (error) throw new Error(error);
 
-  console.log(body);
+  // console.log(body);
   res.send(body.objects)
 });       
 }
@@ -220,10 +220,10 @@ request(options1, function (error, response, body) {
 })
 
 router.post('/postcash', (req, res) => {
-      console.log('POST cash route');
-      console.log(req.body);
-      console.log('is authenticated?', req.isAuthenticated());
-      console.log('user', req.user);
+      // console.log('POST cash route');
+      // console.log(req.body);
+      // console.log('is authenticated?', req.isAuthenticated());
+      // console.log('user', req.user);
       if(req.isAuthenticated()){//in order to post an item, user must be signed in
           let queryText = `INSERT INTO transactions ("total") VALUES ($1);`;
           pool.query(queryText, req.body).then((result)=>{
@@ -238,9 +238,9 @@ router.post('/postcash', (req, res) => {
   });
   router.get('/getcash', (req, res) => {
     
-        console.log('/userinfo GET route');
-        console.log('is authenticated?', req.isAuthenticated());
-        console.log('user', req.user);
+        // console.log('/userinfo GET route');
+        // console.log('is authenticated?', req.isAuthenticated());
+        // console.log('user', req.user);
         if (req.isAuthenticated()) {
             let queryText = `SELECT * FROM transactions;`;
             pool.query(queryText).then((result) => {
@@ -255,9 +255,19 @@ router.post('/postcash', (req, res) => {
         }
     });//end router
 
-router.get('/getWeather', (req, res) => {
+router.post('/getWeather', (req, res) => {
+  
+
+
+  let city = req.body.city;
+  let state = req.body.state;
+  let date = (req.body.date).split('-').join('');
+  console.log(date)
     let options = { method: 'GET',
-  url: 'http://api.wunderground.com/api/03fa8d24a90b1d6a/conditions/q/Mn/minneapolis.json',
+  url: 'http://api.wunderground.com/api/03fa8d24a90b1d6a/history_'+ 
+  date +'/q/'+ 
+  state +'/'+ 
+  city +'.json',
   headers: 
    { 
      'Cache-Control': 'no-cache' } };
@@ -270,7 +280,9 @@ request(options, function (error, response, body) {
  });
 });
 
-router.get('/getevents', (req, res) => {
+router.post('/getevents', (req, res) => {
+  let city = req.body.city;
+  let date = req.body.date;
   let options = { method: 'GET',
   url: 'http://api.eventful.com/rest/events/search?app_key=HftNddnqvkw8xDhd&location=San+Diego&date=Future',
   qs: { app_key: 'HftNddnqvkw8xDhd', id: 'E0-001-000278174-6' },
@@ -294,7 +306,7 @@ let events = parseString(xml, (err, result) => {
 
 
 router.post('/productedit', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   let productId = req.body.productId;
   let version = req.body.version;
   let name = req.body.name;
