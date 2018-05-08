@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import NumberFormat from 'react-number-format';
 import Moment from 'react-moment';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
+import compose from 'recompose/compose';
 
 
 const mapStateToProps = state => ({
@@ -12,9 +16,39 @@ const mapStateToProps = state => ({
     info: state.squareGetReducer
   });
 
+  const styles = theme => ({
+    container: {
+      width: '80%',
+      margin: 2,
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      margin: 0,
+      width: '80%',
+    },
+  });
+
 class TransactionHistory extends React.Component {
-
-
+  // constructor(props){
+  //   super(props)
+  // }
+  state = {
+      
+    date: "2018-05-24",
+    
+  
+  
+  }
+  handleDateInput = (inputText) => {
+    return (event) => {
+      // let newDate = new Date(inputText)
+      console.log(this.state.date)
+      this.setState({
+        [inputText]: event.target.value
+      });
+    }
+  }
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({
@@ -30,6 +64,7 @@ class TransactionHistory extends React.Component {
       }
 
     render() {
+      const { classes } = this.props;
       let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
         return(
             <h3 key={cash.id}>
@@ -38,8 +73,9 @@ class TransactionHistory extends React.Component {
           {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
         )
       })
-    
-        let transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
+         // const dateSort = (item => item.created_at === this.state.date);
+          //   creditTransactions.filter(dateSort)
+       let creditTransactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
             return(
                 <h3 key={transaction.id}>
                 <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
@@ -47,6 +83,8 @@ class TransactionHistory extends React.Component {
               {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
             )
           })
+         
+          console.log(creditTransactions)
         let content = null;
     
         if (this.props.user.userName) {
@@ -55,7 +93,22 @@ class TransactionHistory extends React.Component {
             <div>
               
               <h2>Transaction History</h2>
-              {transactions}
+              <form className={classes.container} noValidate> 
+              
+       <TextField
+        id="date"
+        label="Date"
+        type="date"
+        value={this.state.date}
+        placeholder="2018-05-24"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={this.handleDateInput('date')}
+      /> 
+     </form> 
+              {creditTransactions}
               {cashActions}
             </div>
           );
@@ -70,6 +123,12 @@ class TransactionHistory extends React.Component {
       }   
 }
 
-
+TransactionHistory.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
   
-  export default connect(mapStateToProps)(TransactionHistory);
+  // export default connect(mapStateToProps)(TransactionHistory);
+  export default compose(
+    withStyles(styles, { name: 'TransactionHistory' }),
+    connect(mapStateToProps)
+  )(TransactionHistory);
