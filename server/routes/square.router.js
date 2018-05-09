@@ -282,9 +282,10 @@ request(options, function (error, response, body) {
 
 router.post('/getevents', (req, res) => {
   let city = req.body.city;
-  let date = req.body.date;
+  let date = (req.body.date).split('-').join('');
   let options = { method: 'GET',
-  url: 'http://api.eventful.com/rest/events/search?app_key=HftNddnqvkw8xDhd&location=San+Diego&date=Future',
+  url: 'http://api.eventful.com/json/events/search?app_key=HftNddnqvkw8xDhd&location='+ 
+  city +'&t='+ date +'-'+ date,
   qs: { app_key: 'HftNddnqvkw8xDhd', id: 'E0-001-000278174-6' },
   headers: 
    { 
@@ -293,13 +294,14 @@ router.post('/getevents', (req, res) => {
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
-
+  console.log(body);
+  res.send(body)
   
-  const xml = body;
-let events = parseString(xml, (err, result) => {
-  console.log(result.search.events[0]);
-  res.send(result.search.events[0])
-});
+//   const xml = body;
+// let events = parseString(xml, (err, result) => {
+//   console.log(result.search.events[0]);
+//   res.send(result.search.events[0])
+// });
 });
 });
 // eventful key HftNddnqvkw8xDhd

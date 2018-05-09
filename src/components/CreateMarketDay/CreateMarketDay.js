@@ -17,7 +17,9 @@ import Button from 'material-ui/Button';
 
 const mapStateToProps = state => ({
     user: state.user,
-    info: state.marketReducer
+    info: state.marketReducer,
+    weather: state.marketReducer.weather,
+    localEvents: state.marketReducer.events
   });
   const styles = theme => ({
     progress: {
@@ -27,11 +29,13 @@ const mapStateToProps = state => ({
 class TransactionHistory extends React.Component {
   state = {
     open: true,
-    marketName: [],
-    address: [],
-    city: [],
-    state: [],
-    date:[]
+    spinner: true,
+    marketName: '',
+    address: '',
+    city: '',
+    state: '',
+    date:"",
+    weatherData: []
   };
   handleOpen = () => {
     this.setState({ open: true });
@@ -39,6 +43,7 @@ class TransactionHistory extends React.Component {
   };
 
   submitMarketData = () =>{
+    
     console.log(this.state)
     this.props.dispatch({
       type: 'MARKET_GET',
@@ -49,7 +54,7 @@ class TransactionHistory extends React.Component {
     address: '',
     city: '',
     state: '',
-    date: ''
+    date: '',
     })
   }
 
@@ -63,27 +68,41 @@ class TransactionHistory extends React.Component {
       
     }
   }
+  
     componentDidMount() {
-      
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        
-
+    //     this.props.dispatch({
+    //       type: 'MARKET_GET',
+    //       payload: this.state
+    // });
+    
       }
     
       componentDidUpdate() {
         if (!this.props.user.isLoading && this.props.user.userName === null) {
           this.props.history.push('home');
         }
+
+        
       }
 
     render() {
       const { classes } = this.props;
-      // let localEvents = this.props.info.events.event && this.props.info.events.event.map( (localEvent) => {
-      //   return(
-      //     <h3>{localEvent}</h3>
-      //   )
-      // })
       
+      this.props.localEvents
+      
+      let localevents = this.props.localEvents && this.props.localEvents.map( (events) => {
+
+        return(
+            events.date
+        )
+      })
+     
+      let localweather = this.props.weather && this.props.weather.map( (daily) => {
+        return(
+            <h1>{daily.maxtempi}</h1>
+        )
+      })
          
         
       
@@ -111,11 +130,7 @@ class TransactionHistory extends React.Component {
           content = (
               
             <div>
-              {/* marketName: [],
-    address: [],
-    city: [],
-    state: [],
-    date:[] */}
+            
               <h2>View Market Day</h2>
               <TextField
                  value={this.state.marketName} type='text'
@@ -141,11 +156,13 @@ class TransactionHistory extends React.Component {
 
           <Button onClick={()=>this.submitMarketData()}>Submit</Button>
               {/* <a href={this.props.info.events}> click Me </a> */}
-              {/* <pre>{JSON.stringify(this.props.info.events)}</pre> */}
-              {/* <pre>{JSON.stringify(this.props.info.weather)}</pre> */}
-              {/* {localEvents} */}
+              <pre>{JSON.stringify(this.props.localEvents)}</pre> 
+              <pre>{JSON.stringify(this.props.weather)}</pre>
+              {localevents}
+              {localweather}
+              
               <MenuModal/>
-              {/* {!transactions && <CircularProgress className={classes.progress} thickness={10} size={90} />} */}
+              {/* { <CircularProgress className={classes.progress} thickness={10} size={90} />} */}
               {/* {transactions}
               {cashActions} */}
             </div>

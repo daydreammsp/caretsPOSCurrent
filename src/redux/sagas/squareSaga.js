@@ -97,27 +97,24 @@ function* cashPaymentPost(action){
 }
 
 function* marketViewGet(action){
-    // marketName: '',
-    // address: '',
-    // city: '',
-    // state: '',
-    // date: ''
+   
     
     try {
         const squareGet = yield call(axios.get, '/api/square/get');
         const cashGet = yield call(axios.get, '/api/square/getcash');
          const weatherGet = yield call(axios.post, '/api/square/getWeather', action.payload);
          const eventsGet = yield call(axios.post, '/api/square/getevents', action.payload);
-        console.log(squareGet.data)
-        console.log(cashGet.data)
-        console.log(weatherGet.data)
-        console.log(eventsGet.data)
+        console.log("transactions credit",squareGet.data)
+        console.log("transactions cash",cashGet.data)
+        console.log("weather data",weatherGet.data.history.dailysummary)
+        console.log("event data",eventsGet.data.events.event)
         yield put({
             type: 'MARKET_VIEW',
             payload: {credit:squareGet.data.transactions,
                         cash: cashGet.data,
-                    weather: weatherGet.data,
-                events: eventsGet.data}
+                    weather: weatherGet.data.history.dailysummary,
+                events: eventsGet.data.events.event,
+                    spinner: false}
         })
     } catch (error) {}
 }
