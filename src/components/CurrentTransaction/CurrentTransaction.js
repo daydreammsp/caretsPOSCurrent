@@ -12,13 +12,14 @@ const mapStateToProps = state => ({
     user: state.user,
   });
 const styles = {
+  
   list: {
     width: 250,
   },
   fullList: {
     width: 'auto',
     margin: 5,
-    backgroundColor: '#E4E4E3',
+    // backgroundColor: '#E4E4E3',
     textAlign: 'center'
   },
   pageItems:{
@@ -50,9 +51,9 @@ class CurrentTransaction extends React.Component {
     
     let dropDownList = this.props.itemsArr.map( (item) => {
         return(
-            <div key={item.id}>
-            <div className={classes.fullList}><h3>{item.item_data.name} {(parseInt(item.item_data.description)).toFixed(2)}</h3></div>
-            </div>
+          
+            <Button variant="raised" color="primary" key={item.id} className={classes.fullList}><h3>{item.item_data.name} {(parseInt(item.item_data.description)).toFixed(2)}</h3></Button>
+            
         )
     })
     

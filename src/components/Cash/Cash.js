@@ -11,8 +11,9 @@ import NumberFormat from 'react-number-format';
 
 const styles = theme => ({
     button: {
-      margin: theme.spacing.unit,
-      
+      margin: 5,
+      width: '90%',
+      height: 40
     },
     // input: {
     //   display: 'none',
@@ -75,7 +76,9 @@ submitTotal = (total)=>{
       cashVal: amount
     })
   }
+  
   render() {
+    const { classes } = this.props;
     // let amountDue = (((this.props.cashPayment/100).toFixed(2) * .05) + parseInt((this.props.cashPayment/100).toFixed(2))).toFixed(2)
     let amountDue = this.props.cashPayment
     let changeDue;
@@ -97,15 +100,18 @@ submitTotal = (total)=>{
             value={this.state.cashVal}
             placeholder='product'
             onChange={this.handleProductInput('product')}></input> */}
-            <Button onClick={()=>this.submitTotal(amountDue)}>Submit Payment</Button>
+            <Button className={classes.button} variant="raised" color="primary" onClick={()=>this.submitTotal(amountDue)}>Submit Payment</Button>
             <h3>Change Due</h3>
             <h1>{(changeDue).toFixed(2)}</h1>
-            <Button onClick={()=>this.changeAmount(10)}>10 Dollars</Button>
-            <Button onClick={()=>this.changeAmount(20)}>20 Dollars</Button>
-            <Button onClick={()=>this.changeAmount(40)}>40 Dollars</Button>
-            <Button onClick={()=>this.changeAmount(50)}>50 Dollars</Button>
-            <Button onClick={()=>this.changeAmount(100)}>100 Dollars</Button>
+            <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(10)}>10 Dollars</Button><br/>
+            <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(20)}>20 Dollars</Button><br/>
+            <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(40)}>40 Dollars</Button><br/>
+            <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(50)}>50 Dollars</Button><br/>
+            <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(100)}>100 Dollars</Button>
             
+
+
+
           </div>
         );
       }

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import compose from 'recompose/compose';
+import Button from 'material-ui/Button';
 
 
 const mapStateToProps = state => ({
@@ -27,6 +28,10 @@ const mapStateToProps = state => ({
       margin: 0,
       width: '80%',
     },
+    button:{
+      margin: 2,
+      width: '90%'
+    }
   });
 
 class TransactionHistory extends React.Component {
@@ -83,19 +88,19 @@ class TransactionHistory extends React.Component {
       const { classes } = this.props;
       let cashActions = this.state.sortedDateCash.map( (cash) => {
         return(
-            <h3 key={cash.id}>
-            <Moment format="YYYY/MM/DD">{cash.date}</Moment>
+            <Button className={classes.button} variant="raised" color="primary" key={cash.id}>
+            {/* <Moment format="YYYY/MM/DD">{cash.date}</Moment> */}
             
-          {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
+          <strong>Cash </strong> {"$"}{(parseInt(cash.total)).toFixed(2)}</Button>
         )
       })
          
         let filteredTransactions = this.state.sortedDateCredit.map( (transaction) => {
             return(
-                <h3 key={transaction.id}>
-                <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
+                <Button className={classes.button} variant="raised" color="secondary" key={transaction.id}>
+                {/* <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment> */}
                 
-              {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
+                <strong>Credit </strong> {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</Button>
             )
           })
          

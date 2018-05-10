@@ -24,12 +24,13 @@ const styles = {
   list: {
     minwidth: 250,
     padding: 8,
-    backgroundColor: '#E4E4E3',
+    // backgroundColor: 'primary',
   },
   largeIcon: {
     width: 60,
     height: 60,
   },
+  
 };
 
 class MainMenu extends React.Component {
@@ -57,30 +58,30 @@ class MainMenu extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-      <h2>CARET^S</h2>
+      <h1>CARET^S</h1>
       <List>
-        Welcome {this.props.user.userName}
+        Welcome <h3>{this.props.user.userName}</h3>
       </List>
         <List> 
         <Link className="navMenu" to="/CheckoutMain">
-           <Button><h3>Checkout</h3></Button>
+           <Button >Checkout</Button>
           </Link>
         </List>
         <Divider />
         <List>
         <Link className="navMenu" to="/TransactionHistory">
-           <Button><h3>Transactions</h3></Button>
+           <Button >Transactions</Button>
           </Link></List>
         <Divider />
         <List>
         <Link className="navMenu" to="/CreateMarketDay">
-        <Button><h3>View Market Day</h3></Button>
+        <Button >View Market Day</Button>
         
           </Link></List>
         <Divider />
         <List>
         <Link className="navMenu" to="/ActualAddProduct">
-        <Button><h3>Add Product</h3></Button>
+        <Button>Add/Edit Product</Button>
           </Link></List>
         <Divider />
         

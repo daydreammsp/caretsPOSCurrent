@@ -89,15 +89,26 @@ class TransactionHistory extends React.Component {
     render() {
       const { classes } = this.props;
       
-      this.props.localEvents
-      
       let localevents = this.props.localEvents && this.props.localEvents.map( (events) => {
 
         return(
-            events.date
+            <h1>{events.title}
+             
+             </h1>
+            
         )
       })
-     
+      
+                  let newEvents = localevents && localevents.map( (localEvent)=>{
+                      return (
+                        localEvent
+                        
+                      )
+                  })
+
+
+
+
       let localweather = this.props.weather && this.props.weather.map( (daily) => {
         return(
             <h1>{daily.maxtempi}</h1>
@@ -156,15 +167,15 @@ class TransactionHistory extends React.Component {
 
           <Button onClick={()=>this.submitMarketData()}>Submit</Button>
               {/* <a href={this.props.info.events}> click Me </a> */}
-              <pre>{JSON.stringify(this.props.localEvents)}</pre> 
-              <pre>{JSON.stringify(this.props.weather)}</pre>
-              {localevents}
+              {/* <pre>{JSON.stringify(this.props.localEvents)}</pre> 
+              <pre>{JSON.stringify(this.props.weather)}</pre> */}
+              {newEvents}
               {localweather}
               
               <MenuModal/>
               {/* { <CircularProgress className={classes.progress} thickness={10} size={90} />} */}
-              {/* {transactions}
-              {cashActions} */}
+              {transactions}
+              {cashActions}
             </div>
           );
         }

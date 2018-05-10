@@ -36,6 +36,7 @@
     "redux-saga": "^0.16.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
+    "square-connect": "^2.7.0",
     "xml2js": "^0.4.19",
     "xml2js-parser": "^1.1.1"
   },

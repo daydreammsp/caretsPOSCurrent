@@ -62,7 +62,7 @@ class LoginPage extends Component {
   render() {
     return (
       
-      <div >
+      <div>
         { this.renderAlert() }
         <h1>CARET^S</h1>
         <form className="loginForm" onSubmit={this.login}>

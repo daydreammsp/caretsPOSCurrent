@@ -15,12 +15,17 @@ import CurrentTransaction from '../CurrentTransaction/CurrentTransaction';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-    
+    margin: 5,
+    minWidth: '60%',
   },
-  // input: {
-  //   display: 'none',
-  // },
+  button1: {
+    margin: 3,
+    minWidth: '100%',
+    height: '20%',
+  },
+  container:{
+    flex: 'column',
+  }
 });
 
 const mapStateToProps = state => ({
@@ -139,11 +144,11 @@ return parseInt(a)+ parseInt(b)
     
         if (this.props.user.userName) {
           content = (
-            <div className="checkout"> <Button variant="raised" color="primary">
+            <div className={classes.container}className="checkout"> <Button className={classes.button} variant="raised" color="secondary">
               <CurrentTransaction itemsArr={this.state.itemsArr}/>
               </Button>
               {/* <h2>Checkout</h2> */}
-             <h1>$ {this.state.totalIn}</h1>
+             <h1 >$ {this.state.totalIn}</h1>
               {/* <pre>{JSON.stringify(this.props.cashPayment)}</pre> */}
               {/* <NumberFormat value={((this.state.totalIn).toFixed(2))} displayType={'text'} 
               
@@ -153,8 +158,8 @@ return parseInt(a)+ parseInt(b)
               {/* <input type='text'
             placeholder='amount'
             onChange={this.handleAmountChange('amount')}></input><br></br> */}
-          <Button variant="raised" color="primary" className={classes.button} onClick={()=>this.cashPayment(this.state.totalIn)}>Cash</Button>
-          <Button variant="raised" color="primary" className={classes.button} onClick={this.handleClick}>Credit</Button>
+          <Button variant="raised" color="primary" className={classes.button1} onClick={()=>this.cashPayment(this.state.totalIn)}>Cash</Button>
+          <Button variant="raised" color="primary" className={classes.button1} onClick={this.handleClick}>Credit</Button>
           {listProducts}
          
             </div>

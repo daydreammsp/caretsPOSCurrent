@@ -18,9 +18,28 @@ import ActualAddProduct from './components/ActualAddProduct/ActualAddProduct';
 import Cash from './components/Cash/Cash';
 import CheckoutMain from './components/CheckoutMain/CheckoutMain';
 import './styles/main.css';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: '#757ce8',
+      main: '#c5e1a5',
+      // dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      // light: '#ff7961',
+      main: '#ffe082',
+      // dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 const App = () => (
   <div>
+    <MuiThemeProvider theme={theme}>
     <Header />
     <Router>
     
@@ -67,6 +86,7 @@ const App = () => (
 
       </Switch>
     </Router>
+    </MuiThemeProvider>
   </div>
 );
 

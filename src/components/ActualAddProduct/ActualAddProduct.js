@@ -39,6 +39,9 @@ const styles = theme => ({
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 3,
   },
+  button:{
+    margin: 3,
+  }
 });
 
 const mapStateToProps = state => ({
@@ -163,7 +166,7 @@ console.log(this.addForm)
             <TextField  value={this.state.price} type='text'
             placeholder='Description'
             onChange={this.handleProductInput('price')}/>
-            <button onClick={this.handleClick}>Submit</button>
+            <Button className={classes.button}variant="raised" color="secondary" onClick={this.handleClick}>Submit</Button>
             </div>
         )
       
@@ -175,12 +178,12 @@ console.log(this.addForm)
               <ExpansionPanel>
                 
                 <ExpansionPanelSummary 
-                expandIcon={<EditIcon onClick={()=>this.editClickFill(product)}/>}>
+                expandIcon={<EditIcon color="secondary" onClick={()=>this.editClickFill(product)}/>}>
                 
                   <Typography className={classes.heading}>
                   
                   <span>{product.item_data.name}   </span> 
-                <strong>{product.item_data.description}</strong> 
+                <strong>${product.item_data.description}</strong> 
                {/* <Button variant="raised" onClick={()=>{this.deleteProduct(product.id)}}><h3>Delete</h3></Button> */}
                
                   </Typography>
@@ -208,7 +211,7 @@ console.log(this.addForm)
             placeholder='absolute url'
             onChange={this.handleImgChange('image_url')}></input> */}
 
-          <button onClick={()=>this.handleClickEdit(product)}>Submit</button>
+          <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.handleClickEdit(product)}>Submit</Button>
              
               <h3>{listProducts}</h3>
              
@@ -219,7 +222,7 @@ console.log(this.addForm)
               <div>
               <Tooltip id="tooltip-icon" title="Delete">
                <IconButton aria-label="Delete">
-                <DeleteIcon onClick={()=>{this.deleteProduct(product.id)}}/>
+                <DeleteIcon color="primary"onClick={()=>{this.deleteProduct(product.id)}}/>
                 </IconButton>
                  </Tooltip>
                  </div>

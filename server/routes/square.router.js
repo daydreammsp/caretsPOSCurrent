@@ -285,7 +285,7 @@ router.post('/getevents', (req, res) => {
   let date = (req.body.date).split('-').join('');
   let options = { method: 'GET',
   url: 'http://api.eventful.com/json/events/search?app_key=HftNddnqvkw8xDhd&location='+ 
-  city +'&t='+ date +'-'+ date,
+  city +'&sort_order=date&date='+ date +'-'+ date,
   qs: { app_key: 'HftNddnqvkw8xDhd', id: 'E0-001-000278174-6' },
   headers: 
    { 
