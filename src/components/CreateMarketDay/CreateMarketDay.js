@@ -73,7 +73,9 @@ class TransactionHistory extends React.Component {
     minTemp: 5,
     maxHum: 5,
     minHum: 5,
-    percip: 5
+    percip: 5,
+    cashActions: [],
+    transactions: []
   };
   handleOpen = () => {
     this.setState({ open: true });
@@ -163,21 +165,18 @@ class TransactionHistory extends React.Component {
         
       
       
-      let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
+       this.cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
         return(
-            <h3 key={cash.id}>
-            {/* <Moment format="YYYY/MM/DD">{cash.date}</Moment> */}
             
-          {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
+        (parseInt(cash.total)).toFixed(2)
         )
       })
     
-        let transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
+        this.transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
             return(
-                <h3 key={transaction.id}>
-                {/* <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment> */}
                 
-              {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
+                
+            (parseInt(transaction.tenders[0].amount_money.amount/100)).toFixed(2)
             )
           })
         let content = null;
@@ -237,18 +236,19 @@ class TransactionHistory extends React.Component {
               maxHum={this.maxHum}
               minHum={this.minHum}
               percip={this.percip}
-          
+              transactions={this.transactions}
+              cashActions={this.cashActions}
                 />
               
               {/* {localweather} */}
-              {transactions}
+              {/* {transactions} */}
               {/* {myChart} */}
               
              
               <MenuModal/>
               {/* { <CircularProgress className={classes.progress} thickness={10} size={90} />} */}
               
-              {cashActions}
+              {/* {cashActions} */}
             </div>
           );
         }
