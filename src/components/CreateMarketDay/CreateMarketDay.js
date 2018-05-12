@@ -12,6 +12,13 @@ import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
+import Select from 'material-ui/Select';
+import Charts from '../../components/Chart/Chart.js';
+
+
 
 
 
@@ -25,17 +32,48 @@ const mapStateToProps = state => ({
     progress: {
       margin: theme.spacing.unit * 2,
     },
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    formControl: {
+      margin: theme.spacing.unit,
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing.unit * 2,
+    },
   });
 class TransactionHistory extends React.Component {
   state = {
+    
     open: true,
     spinner: true,
+    markets: [
+      {market: 'Mpls Farmers Market',
+      state: 'mn',
+       date: "2018-05-03",
+       city: 'minneapolis'},
+       {market: 'St. Paul Farmers Market',
+       state: 'mn',
+       date: "2018-05-04",
+       city: 'stpaul'},
+       {market: 'Dallas Farmers Market',
+       state: 'mn',
+       date: "2018-05-06",
+       city: 'dallas'}
+    ],
     marketName: '',
     address: '',
-    city: '',
-    state: '',
+    city: 'Minneapolis',
+    state: 'mn',
     date:"",
-    weatherData: []
+    weatherData: [],
+    maxTemp: 5,
+    minTemp: 5,
+    maxHum: 5,
+    minHum: 5,
+    percip: 5
   };
   handleOpen = () => {
     this.setState({ open: true });
@@ -59,11 +97,12 @@ class TransactionHistory extends React.Component {
   }
 
   handleMarketInput = (inputText) => {
+    
     return (event) => {
-      // let newDate = new Date(inputText)
-      
+      let newVar = event.target.value
+      console.log(newVar)
       this.setState({
-        [inputText]: event.target.value
+        [inputText]:event.target.value
       });
       
     }
@@ -89,29 +128,35 @@ class TransactionHistory extends React.Component {
     render() {
       const { classes } = this.props;
       
-      let localevents = this.props.localEvents && this.props.localEvents.map( (events) => {
+      // let localevents = this.props.localEvents && this.props.localEvents.map( (events) => {
 
-        return(
-            <h1>{events.title}
+      //   return(
+      //       <h1>{events.title}
              
-             </h1>
+      //        </h1>
             
-        )
-      })
+      //   )
+      // })
       
-                  let newEvents = localevents && localevents.map( (localEvent)=>{
-                      return (
-                        localEvent
+      //             let newEvents = localevents && localevents.map( (localEvent)=>{
+      //                 return (
+      //                   localEvent
                         
-                      )
-                  })
+      //                 )
+      //             })
 
 
 
 
       let localweather = this.props.weather && this.props.weather.map( (daily) => {
+         
         return(
-            <h1>{daily.maxtempi}</h1>
+          this.maxTemp = daily.maxtempi,
+          this.minTemp = daily.mintempi,
+          this.maxHum = daily.maxhumidity,
+          this.minHum = daily.minhumidity,
+          this.percip = daily.precipi
+          
         )
       })
          
@@ -121,7 +166,7 @@ class TransactionHistory extends React.Component {
       let cashActions = this.props.info.cash && this.props.info.cash.map( (cash) => {
         return(
             <h3 key={cash.id}>
-            <Moment format="YYYY/MM/DD">{cash.date}</Moment>
+            {/* <Moment format="YYYY/MM/DD">{cash.date}</Moment> */}
             
           {"$"}{(parseInt(cash.total)).toFixed(2)}</h3>
         )
@@ -130,7 +175,7 @@ class TransactionHistory extends React.Component {
         let transactions = this.props.info.credit && this.props.info.credit.map( (transaction) => {
             return(
                 <h3 key={transaction.id}>
-                <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment>
+                {/* <Moment format="YYYY/MM/DD">{transaction.created_at}</Moment> */}
                 
               {"$"}{(transaction.tenders[0].amount_money.amount/100).toFixed(2)}</h3>
             )
@@ -143,22 +188,39 @@ class TransactionHistory extends React.Component {
             <div>
             
               <h2>View Market Day</h2>
-              <TextField
+              <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple">Market</InputLabel>
+          <Select
+            native
+            value={this.state.markets.market}
+            onChange={this.handleMarketInput('date')}
+           
+            inputProps={{
+              id: 'age-native-simple',
+            }}
+          >
+            <option value="" />
+            <option value={this.state.markets[0].date}>{this.state.markets[0].market}</option>
+            <option value={this.state.markets[1].date}>{this.state.markets[1].market}</option>
+            <option value={this.state.markets[2].date}>{this.state.markets[2].market}</option>
+          </Select>
+        </FormControl>
+               {/* <TextField
                  value={this.state.marketName} type='text'
                 placeholder='Market Name'
                 onChange={this.handleMarketInput('marketName')}/>
               
             <TextField value={this.state.address} type='text'
             placeholder='Address'
-            onChange={this.handleMarketInput('address')}/>
+            onChange={this.handleMarketInput('address')}/> */}
 
-            <TextField  value={this.state.city} type='text'
+            {/* <TextField  value={this.state.city} type='text'
             placeholder='City'
-            onChange={this.handleMarketInput('city')}/>
+            onChange={this.handleMarketInput('city')}/> */}
 
-            <TextField  value={this.state.state} type='text'
+            {/* <TextField  value={this.state.state} type='text'
             placeholder='State'
-            onChange={this.handleMarketInput('state')}/>
+            onChange={this.handleMarketInput('state')}/>  */}
 
             <TextField  value={this.state.date} type='date'
             placeholder='date'
@@ -169,12 +231,23 @@ class TransactionHistory extends React.Component {
               {/* <a href={this.props.info.events}> click Me </a> */}
               {/* <pre>{JSON.stringify(this.props.localEvents)}</pre> 
               <pre>{JSON.stringify(this.props.weather)}</pre> */}
-              {newEvents}
-              {localweather}
+              <Charts 
+              maxTemp={this.maxTemp}
+              minTemp={this.minTemp}
+              maxHum={this.maxHum}
+              minHum={this.minHum}
+              percip={this.percip}
+          
+                />
               
+              {/* {localweather} */}
+              {transactions}
+              {/* {myChart} */}
+              
+             
               <MenuModal/>
               {/* { <CircularProgress className={classes.progress} thickness={10} size={90} />} */}
-              {transactions}
+              
               {cashActions}
             </div>
           );

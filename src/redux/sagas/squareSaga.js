@@ -103,17 +103,17 @@ function* marketViewGet(action){
         const squareGet = yield call(axios.get, '/api/square/get');
         const cashGet = yield call(axios.get, '/api/square/getcash');
          const weatherGet = yield call(axios.post, '/api/square/getWeather', action.payload);
-         const eventsGet = yield call(axios.post, '/api/square/getevents', action.payload);
+        //  const eventsGet = yield call(axios.post, '/api/square/getevents', action.payload);
         console.log("transactions credit",squareGet.data)
         console.log("transactions cash",cashGet.data)
         console.log("weather data",weatherGet.data.history.dailysummary)
-        console.log("event data",eventsGet.data.events.event)
+        // console.log("event data",eventsGet.data.events.event)
         yield put({
             type: 'MARKET_VIEW',
             payload: {credit:squareGet.data.transactions,
                         cash: cashGet.data,
                     weather: weatherGet.data.history.dailysummary,
-                events: eventsGet.data.events.event,
+        events: {},
                     spinner: false}
         })
     } catch (error) {}
