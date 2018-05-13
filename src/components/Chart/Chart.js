@@ -149,7 +149,7 @@ class Charts extends React.Component {
       });
         return(
             <div>
-                <h1>{this.props.cashActions}</h1>
+                
             <canvas id="myChart" maxWidth="200" maxHeight="200"></canvas>
             <canvas id="myChart1" maxWidth="200" maxHeight="200"></canvas>
             <canvas id="myChart2" maxWidth="200" maxHeight="200"></canvas>

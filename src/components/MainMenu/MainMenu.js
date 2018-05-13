@@ -28,10 +28,10 @@ const styles = {
     // backgroundColor: '#dbd5d500',
   },
   
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
+  // largeIcon: {
+  //   width: 60,
+  //   height: 60,
+  // },
   
 };
 
@@ -61,35 +61,40 @@ class MainMenu extends React.Component {
     const sideList = (
       <div className={classes.list}>
       
-      <h1>CARET^S</h1>
-      <List>
-        Welcome <h3>{this.props.user.userName}</h3>
-      </List>
+      <Button variant="raised" color="secondary"><h1>CARET^S</h1></Button><br/>
+      
+      {/* <List>
+      <Button variant="raised" color="primary">
+        <strong>Welcome </strong>
+        <strong>{this.props.user.userName}</strong>
+        </Button>
+      </List> */}
+      
         <List> 
         <Link className="navMenu" to="/CheckoutMain">
-           <Button >Checkout</Button>
+           <Button variant="raised" color="primary">Checkout</Button>
           </Link>
         </List>
         <Divider />
         <List>
         <Link className="navMenu" to="/TransactionHistory">
-           <Button >Transactions</Button>
+           <Button variant="raised" color="primary">Transactions</Button>
           </Link></List>
         <Divider />
         <List>
         <Link className="navMenu" to="/CreateMarketDay">
-        <Button >View Market Day</Button>
+        <Button variant="raised" color="primary">View Market Day</Button>
         
           </Link></List>
         <Divider />
         <List>
         <Link className="navMenu" to="/ActualAddProduct">
-        <Button>Add/Edit Product</Button>
+        <Button variant="raised" color="primary">Add/Edit Product</Button>
           </Link></List>
         <Divider />
         
         <List>
-          <h2 className="navMenu" onClick={()=>{this.logout()}}>Logout</h2></List>
+        <Button variant="raised" color="secondary"><h3 className="navMenu" onClick={()=>{this.logout()}}>Logout</h3></Button></List>
       
           
           </div>

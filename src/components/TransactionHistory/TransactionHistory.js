@@ -112,7 +112,7 @@ class TransactionHistory extends React.Component {
               
             <div>
               
-              <h2>Transaction History</h2>
+              <Button variant="raised" color="primary"><h2>Transaction History</h2></Button><br/><br/>
               {/* <form className={classes.container} noValidate>  */}
               
        <TextField

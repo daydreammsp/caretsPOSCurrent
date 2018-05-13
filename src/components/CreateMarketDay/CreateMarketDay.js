@@ -43,6 +43,9 @@ const mapStateToProps = state => ({
     selectEmpty: {
       marginTop: theme.spacing.unit * 2,
     },
+    button:{
+      margin: 5
+    }
   });
 class TransactionHistory extends React.Component {
   state = {
@@ -186,7 +189,8 @@ class TransactionHistory extends React.Component {
               
             <div>
             
-              <h2>View Market Day</h2>
+            <Button className={classes.button} variant="raised" color="primary"><h2>View Market Day</h2>
+              </Button>
               <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple">Market</InputLabel>
           <Select
@@ -226,7 +230,7 @@ class TransactionHistory extends React.Component {
             onChange={this.handleMarketInput('date')}/>
           
 
-          <Button onClick={()=>this.submitMarketData()}>Submit</Button>
+          <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.submitMarketData()}>Submit</Button>
               {/* <a href={this.props.info.events}> click Me </a> */}
               {/* <pre>{JSON.stringify(this.props.localEvents)}</pre> 
               <pre>{JSON.stringify(this.props.weather)}</pre> */}

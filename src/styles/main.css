@@ -109,9 +109,7 @@ text-decoration: none;
     color: black;
     text-decoration: none;
 }
-.navMenu:hover { 
-    background-color: yellow;
-}
+
 .loginPage{
     background-color: #dbd5d5;
     
