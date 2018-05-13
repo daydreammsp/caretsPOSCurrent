@@ -11,7 +11,10 @@ const mapStateToProps = state => ({
   login: state.login,
 });
 const styles = theme => ({
-  
+  main:{
+    
+    width: '100%'
+  }
 });
 class LoginPage extends Component {
   constructor(props) {
@@ -64,14 +67,19 @@ class LoginPage extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       
-      <div>
-        <Button variant="raised" color="secondary">
+      <div className={classes.main}>
+        
         { this.renderAlert() }
-        <h3>CARET^S</h3>
+        <Button className={classes.main} variant="raised" color="secondary"> 
+        <h1>CARET^S</h1>
+        </Button>
         <form className="loginForm" onSubmit={this.login}>
+        
           <h3>Login</h3>
+          
           <div>
             <label htmlFor="username">
               Username:
@@ -101,11 +109,13 @@ class LoginPage extends Component {
               name="submit"
               value="Log In"
             />
-            </Button>
+            </Button><br/>
+           
             <Link to="/register">Register</Link>
+           
           </div>
         </form>
-        </Button>
+        
       </div>
       
     );
