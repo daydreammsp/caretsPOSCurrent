@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
-
+import Button from 'material-ui/Button';
+import compose from 'recompose/compose';
+import { withStyles } from 'material-ui/styles';
 
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
 });
-
+const styles = theme => ({
+  
+});
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -63,10 +67,11 @@ class LoginPage extends Component {
     return (
       
       <div>
+        <Button variant="raised" color="secondary">
         { this.renderAlert() }
-        <h1>CARET^S</h1>
+        <h3>CARET^S</h3>
         <form className="loginForm" onSubmit={this.login}>
-          <h1>Login</h1>
+          <h3>Login</h3>
           <div>
             <label htmlFor="username">
               Username:
@@ -90,18 +95,25 @@ class LoginPage extends Component {
             </label>
           </div>
           <div>
+            <Button variant="raised" color="primary">
             <input
               type="submit"
               name="submit"
               value="Log In"
             />
+            </Button>
             <Link to="/register">Register</Link>
           </div>
         </form>
+        </Button>
       </div>
       
     );
   }
 }
 
-export default connect(mapStateToProps)(LoginPage);
+// export default connect(mapStateToProps)(LoginPage);
+export default compose(
+  withStyles(styles, { name: 'LoginPage' }),
+  connect(mapStateToProps)
+)(LoginPage);

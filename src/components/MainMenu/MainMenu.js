@@ -22,10 +22,12 @@ const mapStateToProps = state => ({
 
 const styles = {
   list: {
-    minwidth: 250,
+    maxWidth: '100%',
     padding: 8,
-    // backgroundColor: 'primary',
+    
+    // backgroundColor: '#dbd5d500',
   },
+  
   largeIcon: {
     width: 60,
     height: 60,
@@ -58,6 +60,7 @@ class MainMenu extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
+      
       <h1>CARET^S</h1>
       <List>
         Welcome <h3>{this.props.user.userName}</h3>
@@ -87,13 +90,15 @@ class MainMenu extends React.Component {
         
         <List>
           <h2 className="navMenu" onClick={()=>{this.logout()}}>Logout</h2></List>
-      </div>
+      
+          
+          </div>
     );
 
     
 
     return (
-      <div>
+      <div >
         
         <Button onClick={this.toggleDrawer('left', true)}>
         <h1><i className="material-icons md-48">menu</i></h1></Button>
@@ -107,6 +112,7 @@ class MainMenu extends React.Component {
             {sideList}
           </div>
         </Drawer>
+        
       </div>
     );
   }
