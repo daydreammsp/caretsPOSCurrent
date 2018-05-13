@@ -1,3 +1,5 @@
+//holds the cash transaction amount
+
 function cashPayment(state = [], action) {
    
     switch (action.type) {

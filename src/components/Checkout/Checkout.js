@@ -43,7 +43,7 @@ class Checkout extends React.Component {
         itemsArr: []
       }
 
-      
+      // calls get product saga and loads current products on page load
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({
@@ -61,7 +61,7 @@ class Checkout extends React.Component {
           this.props.history.push('home');
         }
       }
-      
+  // toggles the cash payment page and sends the transaction total to state    
  cashPayment = (cash)=> {
    
         this.props.dispatch({
@@ -73,7 +73,7 @@ class Checkout extends React.Component {
           payload: false
         });
       }
-
+//sends transactions to the credit card to square api
       handleClick = () => {
         console.log('clicked!', this.state.totalIn)
         this.props.dispatch({
@@ -85,6 +85,7 @@ class Checkout extends React.Component {
       // handleCashClick = () =>{
       //   console.log("click")
       // }
+      //adds item to current transaction array
       handlePriceClick = (product) =>{
 
          this.state.itemsArr.push(product)
@@ -93,6 +94,7 @@ class Checkout extends React.Component {
          amount: this.state.totalIn
              });
       }
+      //removes items from current transaction array
       handlePriceClickMinus = (product) =>{
         const currentItem = (item => item.id === product.id);
         const deleteItem = this.state.itemsArr.findIndex(currentItem)

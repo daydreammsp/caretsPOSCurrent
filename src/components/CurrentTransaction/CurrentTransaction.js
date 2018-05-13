@@ -38,7 +38,7 @@ class CurrentTransaction extends React.Component {
     bottom: false,
     right: false,
   };
-
+//displays the array that holds the current transaction items/ they are displayed in a top loading drawer
   toggleDrawer = (side, open) => () => {
     this.setState({
       [side]: open,

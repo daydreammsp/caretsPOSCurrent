@@ -1,3 +1,5 @@
+//houses the products received from the api
+
 function squareGetProducts(state = [], action) {
     // Change state with a return
     switch (action.type) {

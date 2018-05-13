@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
     user: state.user,
     info: state.squareGetReducer
   });
-
+//inline styles for the page
   const styles = theme => ({
     container: {
       width: '80%',
@@ -47,6 +47,7 @@ class TransactionHistory extends React.Component {
     
   
   }
+  //filters transactions by the selected date and reformats the date string
   filterTransactions = (newDate)=>{
 
     let dateVar = newDate
@@ -70,6 +71,7 @@ class TransactionHistory extends React.Component {
       this.filterTransactions(event.target.value)
     }
   }
+  //pulls all transactions on page load
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({
@@ -85,7 +87,9 @@ class TransactionHistory extends React.Component {
       }
 
     render() {
+
       const { classes } = this.props;
+      //populates the cash transactions array
       let cashActions = this.state.sortedDateCash.map( (cash) => {
         return(
             <Button className={classes.button} variant="raised" color="primary" key={cash.id}>
@@ -94,7 +98,7 @@ class TransactionHistory extends React.Component {
           <strong>Cash </strong> {"$"}{(parseInt(cash.total)).toFixed(2)}</Button>
         )
       })
-         
+         //populates the credit card transactions
         let filteredTransactions = this.state.sortedDateCredit.map( (transaction) => {
             return(
                 <Button className={classes.button} variant="raised" color="secondary" key={transaction.id}>

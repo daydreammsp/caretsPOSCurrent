@@ -46,7 +46,7 @@ componentDidMount() {
       this.props.history.push('home');
     }
   }
-
+// calls cash transaction saga and sends the total to the db
 submitTotal = (total)=>{
   console.log("cash total", total)
   this.props.dispatch({
@@ -68,6 +68,7 @@ submitTotal = (total)=>{
 //     });
 //   }
 // }
+//sets the change calculated amount in local state
   changeAmount = (amount) => {
     amount 
 
@@ -103,6 +104,7 @@ submitTotal = (total)=>{
             <Button className={classes.button} variant="raised" color="primary" onClick={()=>this.submitTotal(amountDue)}>Submit Payment</Button>
             <h3>Change Due</h3>
             <h1>{(changeDue).toFixed(2)}</h1>
+            
             <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(10)}>10 Dollars</Button><br/>
             <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(20)}>20 Dollars</Button><br/>
             <Button className={classes.button} variant="raised" color="secondary" onClick={()=>this.changeAmount(40)}>40 Dollars</Button><br/>

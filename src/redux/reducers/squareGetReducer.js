@@ -1,3 +1,5 @@
+//holds transaction history information
+
 function squareGetReducer(state = [], action) {
    
     switch (action.type) {

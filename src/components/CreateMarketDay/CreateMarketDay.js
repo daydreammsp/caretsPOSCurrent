@@ -52,6 +52,7 @@ class TransactionHistory extends React.Component {
     
     open: true,
     spinner: true,
+    //hard coded info for local state to populate the dropdown list
     markets: [
       {market: 'Mpls Farmers Market',
       state: 'mn',
@@ -66,6 +67,7 @@ class TransactionHistory extends React.Component {
        date: "2018-05-06",
        city: 'dallas'}
     ],
+    
     marketName: '',
     address: '',
     city: 'Minneapolis',
@@ -84,7 +86,7 @@ class TransactionHistory extends React.Component {
     this.setState({ open: true });
   
   };
-
+//sends the infor associated with the chosen market to the market get saga
   submitMarketData = () =>{
     
     console.log(this.state)
@@ -100,7 +102,7 @@ class TransactionHistory extends React.Component {
     date: '',
     })
   }
-
+//assignes the value to the date input
   handleMarketInput = (inputText) => {
     
     return (event) => {

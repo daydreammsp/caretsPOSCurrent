@@ -1,3 +1,5 @@
+//holds the boolean value that toggles the payment screens
+
 function showReducer(state = [], action) {
     // Change state with a return
     // action.payload = !action.payload

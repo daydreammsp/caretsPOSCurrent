@@ -43,7 +43,7 @@ function* squareProductGet(action){
         })
     } catch (error) {}
 }
-
+//posts new product to the square api
 function* squareNewProductPost(action){
     console.log('post new product')
     try {
@@ -68,7 +68,7 @@ function* deleteProduct(action){
         })
     } catch (error) {}
 }
-
+//toggles payment pages
 function* toggleCashPage(action){
     
     try {
@@ -78,6 +78,8 @@ function* toggleCashPage(action){
         })
     } catch (error) {}
 }
+
+//holds the total for the cash payment page
 function* cashTotalSaga(action){
    
     try {
@@ -87,7 +89,7 @@ function* cashTotalSaga(action){
         })
     } catch (error) {}
 }
-
+//posts cash payment to the db
 function* cashPaymentPost(action){
     console.log('post new product')
     try {
@@ -95,7 +97,7 @@ function* cashPaymentPost(action){
         
     } catch (error) {}
 }
-
+//pulls all the info for the market view page
 function* marketViewGet(action){
    
     

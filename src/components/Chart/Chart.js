@@ -7,6 +7,7 @@ class Charts extends React.Component {
         super()
     }
     render(){
+        //mock up chart
         let ctx = 'myChart';
       let chart = new Chart(ctx, {
           // The type of chart we want to create
@@ -60,6 +61,8 @@ class Charts extends React.Component {
             }
           }
       });
+
+      //mock up chart
       let ctx1 = 'myChart1';
       let chart1 = new Chart(ctx1, {
           // The type of chart we want to create
@@ -90,6 +93,7 @@ class Charts extends React.Component {
             }
           }
       });
+      //mock up chart
       let ctx2 = 'myChart2';
       let chart2 = new Chart(ctx2, {
           // The type of chart we want to create
@@ -115,6 +119,7 @@ class Charts extends React.Component {
           // Configuration options go here
           options: {}
       });
+      //mock up chart
       let ctx3 = 'myChart3';
       let chart3 = new Chart(ctx3, {
           // The type of chart we want to create
@@ -138,6 +143,7 @@ class Charts extends React.Component {
           // Configuration options go here
           options: {}
       });
+      //mock up chart
       let ctx4 = 'myChart4';
       let chart4 = new Chart(ctx4, {
           // The type of chart we want to create
@@ -162,6 +168,7 @@ class Charts extends React.Component {
             }]
         },
       });
+      //mock up chart
       let ctx5 = 'myChart5';
       let chart5 = new Chart(ctx5, {
           // The type of chart we want to create

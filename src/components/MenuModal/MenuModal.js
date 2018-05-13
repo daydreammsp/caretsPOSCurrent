@@ -18,7 +18,7 @@ const styles = theme => ({
     padding: theme.spacing.unit,
   },
 });
-
+// modal that pops up on page load telling the user to switch to desktop view
 class SimpleModal extends React.Component {
   state = {
     open: true,

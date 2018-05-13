@@ -65,6 +65,7 @@ constructor(props){
       
       
       }
+      //handles the input fields for the page
 handleProductInputEdit = (inputText) => {
         return (event) => {
           console.log(inputText)
@@ -73,6 +74,8 @@ handleProductInputEdit = (inputText) => {
           });
         }
       }
+
+      //calls the post saga for the product edits and sends the edit object
 handleClickEdit = (product) => {
         console.log('Edit clicked!', [this.state.editName, this.state.editDescription, this.state.editPrice])
         this.props.dispatch({
@@ -97,6 +100,7 @@ handleProductInput = (inputText) => {
           });
         }
       }
+      //saga call for the new product addition
 handleClick = () => {
         console.log('clicked!', [this.state.name, this.state.description, this.state.price])
         this.props.dispatch({
@@ -112,6 +116,7 @@ handleClick = () => {
         })
         this.addForm = !this.addForm
       }
+      //saga call for the delete saga
 deleteProduct = (productId) => {
     console.log(productId)
     this.props.dispatch({
@@ -120,6 +125,7 @@ deleteProduct = (productId) => {
       });
  
 }
+// populates the edit fields for each item
 editClickFill=(product)=>{
   this.setState({
           editName: product.item_data.name,
@@ -127,6 +133,7 @@ editClickFill=(product)=>{
           editPrice: product.item_data.abbreviation
   })
 }
+//toggles the add product form
 showAddForm = (change)=>{
    this.addForm = change
   this.setState({

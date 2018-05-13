@@ -6,7 +6,7 @@ const parseString = require('xml2js-parser').parseString;
 // let rp = require('request-promise');
 
 
-
+//router to square api retrives all transactions for the time period currently hard coded
 router.get('/get', (req, res) => {
     let options = { method: 'GET',
       url: 'https://connect.squareup.com/v2/locations/CBASEGcVZgUKS8RbqdkU-YjiBxggAQ/transactions',
@@ -28,7 +28,7 @@ router.get('/get', (req, res) => {
       res.send(body)
     });
     })
-
+// router to square api posts transactions/ random number for idempotency_key
     router.post('/', (req, res) => {
         let randomNum = Math.floor(Math.random() * 1000);
         console.log(req.body)
@@ -93,7 +93,7 @@ router.get('/get', (req, res) => {
         });
         })
 
-
+// the post rout that grabs all the products currently active in the 'items' catagory
 router.post('/getproducts', (req, res) => {
   let options = { method: 'POST',
   url: 'https://connect.squareup.com/v2/catalog/search',
@@ -117,7 +117,7 @@ request(options, function (error, response, body) {
   res.send(body.objects)
 });       
 });
-
+//router that posts new product to the square api
 router.post('/postproduct', (req, res) => {
   // console.log(req.body)
   let name = req.body.name;
@@ -176,7 +176,7 @@ request(options, function (error, response, body) {
     }
 });       
 });
-
+// deletes product in the square api
 router.post('/deleteproduct', (req, res) => {
   let productId = req.body
   // console.log(productId)
@@ -218,7 +218,7 @@ request(options1, function (error, response, body) {
   
 })
 })
-
+// router that posts cash transactions to the local db
 router.post('/postcash', (req, res) => {
       // console.log('POST cash route');
       // console.log(req.body);
@@ -236,6 +236,8 @@ router.post('/postcash', (req, res) => {
           res.sendStatus(403);
       }
   });
+
+  //router that pulls cash transations from the local db
   router.get('/getcash', (req, res) => {
     
         // console.log('/userinfo GET route');
@@ -254,7 +256,7 @@ router.post('/postcash', (req, res) => {
             res.sendStatus(403);
         }
     });//end router
-
+// weather router which currently pulls by date and city name
 router.post('/getWeather', (req, res) => {
   
 
@@ -279,7 +281,7 @@ request(options, function (error, response, body) {
   res.send(body)
  });
 });
-
+// events api that is pulling for date and city/ the api is not currently being used in the app
 router.post('/getevents', (req, res) => {
   let city = req.body.city;
   let date = (req.body.date).split('-').join('');
@@ -306,7 +308,7 @@ request(options, function (error, response, body) {
 });
 // eventful key HftNddnqvkw8xDhd
 
-
+//router to edit the products in the square api db
 router.post('/productedit', (req, res) => {
   // console.log(req.body)
   let productId = req.body.productId;

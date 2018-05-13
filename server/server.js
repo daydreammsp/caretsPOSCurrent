@@ -10,6 +10,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+//api router
 const squareRouter = require('./routes/square.router');
 
 // Body parser middleware

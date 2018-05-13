@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
     cashPayment: state.cashPayment,
     show: state.showReducer
   });
-
+//main page to house the two payment pages/ the toggle is handled by a reducer and toggles their view on this page
 class CheckoutMain extends React.Component {
 
     state = {

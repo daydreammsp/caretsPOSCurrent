@@ -14,7 +14,7 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 import compose from 'recompose/compose';
 import MenuModal from '../MenuModal/MenuModal'
 
-
+//main dropdown menu for the whole app
 
 const mapStateToProps = state => ({
   user: state.user,
