@@ -14,31 +14,40 @@ class Charts extends React.Component {
       
           // The data for our dataset
           data: {
-              labels: ["Cash", "Credit"],
+              labels: ["1", "2","3","4","5","6","8","9"],
               datasets: [{
                 //   label: "temp",
                 //   backgroundColor: [
                 //     pattern.draw('square', '#ff6384')
                     
                 // ],
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: [1,2,3,4,5,6,7,8,9,10],
-                  label: 'Cash Payments',
+                  borderColor: 'rgb(255, 99, 125)',
+                  data: this.props.transactions,
+                  label: 'Credit card Payments',
 
-                    // This binds the dataset to the left y axis
+                    // // This binds the dataset to the left y axis
                     yAxisID: 'left-y-axis',
-              }]
+              },
+              {
+                borderColor: 'rgb(210, 200, 125)',
+                data: this.props.cashActions,
+                label: 'Cash Payments',
+
+                  // // This binds the dataset to the left y axis
+                  yAxisID: 'right-y-axis'
+              }
+            ]
           },
       
           // Configuration options go here
           options: {
             scales: {
                 yAxes: [
-                    {ticks: {
-                        suggestedMin: 1,
-                        suggestedMax: 20
-                    }
-                },
+                    // {ticks: {
+                    //     suggestedMin: 1,
+                    //     suggestedMax: 20
+                    // }
+                // },
                     {
                     id: 'left-y-axis',
                     type: 'linear',
@@ -58,13 +67,20 @@ class Charts extends React.Component {
       
           // The data for our dataset
           data: {
-              labels: ["high", "low"],
+              labels: ["payments",],
               datasets: [{
-                  label: "temp",
+                  label: "Credit",
                   backgroundColor: 'rgb(255, 99, 132)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: [this.props.maxHum, this.props.minHum],
-              }]
+                  borderColor: 'rgb(255, 99, 100)',
+                  data: this.props.transactions,
+              },
+              {
+                label: "Cash",
+                backgroundColor: 'rgb(210, 200, 100)',
+                borderColor: 'rgb(210, 200, 100)',
+                data: this.props.cashActions,
+            }
+            ]
           },
       
           // Configuration options go here
@@ -77,17 +93,23 @@ class Charts extends React.Component {
       let ctx2 = 'myChart2';
       let chart2 = new Chart(ctx2, {
           // The type of chart we want to create
-          type: 'doughnut',
+          type: 'horizontalBar',
       
           // The data for our dataset
           data: {
-              labels: ["high", "low"],
+              labels: ["Temp"],
               datasets: [{
-                  label: "temp",
-                  backgroundColor: 'rgb(255, 99, 132)',
+                  label: "High",
+                  backgroundColor: 'rgb(255, 99, 132, .8)',
                   borderColor: 'rgb(255, 99, 132)',
-                  data: [this.props.maxHum, this.props.maxTemp],
-              }]
+                  data: [this.props.maxTemp],
+              },
+              {
+                label: "low",
+                backgroundColor: 'rgb(200, 50, 132, .8)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [this.props.minTemp],
+            }]
           },
       
           // Configuration options go here
@@ -100,12 +122,16 @@ class Charts extends React.Component {
       
           // The data for our dataset
           data: {
-              labels: ["high", "low"],
+            labels: [
+                'transactions',
+                
+                
+            ],
               datasets: [{
-                  label: "temp",
+                  label: ["1","2","4"],
                   backgroundColor: 'rgb(255, 99, 132)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: [this.props.maxHum, this.props.maxTemp],
+                //   borderColor: 'rgb(255, 99, 132)',
+                  data: this.props.cashActions,
               }]
           },
       
@@ -115,16 +141,24 @@ class Charts extends React.Component {
       let ctx4 = 'myChart4';
       let chart4 = new Chart(ctx4, {
           // The type of chart we want to create
-          type: 'line',
+          type: 'pie',
       
           // The data for our dataset
           data: {
-            labels: ["high", "low"],
+            labels: ['Humidity'],
             datasets: [{
-                label: "temp",
+                label: "high",
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [this.props.maxHum, this.props.maxTemp],
+                data: [this.props.maxHum],
+                
+           
+            },
+            {
+                label: "low",
+                backgroundColor: 'rgb(200, 50, 102)',
+                // borderColor: 'rgb(255, 99, 132)',
+                data: [this.props.minHum],
             }]
         },
       });
@@ -135,12 +169,12 @@ class Charts extends React.Component {
       
           // The data for our dataset
           data: {
-              labels: ["high", "low"],
+              labels: ["Percipitation"],
               datasets: [{
-                  label: "temp",
-                  backgroundColor: 'rgb(255, 99, 132)',
+                  label: "percipitation",
+                  backgroundColor: 'rgb(205,200, 9)',
                   borderColor: 'rgb(255, 99, 132)',
-                  data: [this.props.maxHum, this.props.maxTemp],
+                  data: [this.props.percip],
               }]
           },
       
