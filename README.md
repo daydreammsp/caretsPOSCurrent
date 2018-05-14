@@ -2,7 +2,7 @@
 The app is a simple user interface that makes it easy to use in a fast paced enviroment such as a farmer's market. Caret^s is built with the Square API for payment processing and product creation. The app is simple to use and provides weather data along with sales data to provide context for a day of sales.
 
 
-![picture alt](screenshot.png) ![picture alt](screenshot2.png=250x)
+![picture alt](screenshot.png) ![picture alt](screenshot2.png=100px)
 
 # Built With
 *Express
