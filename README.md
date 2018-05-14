@@ -3,8 +3,8 @@ The app is a simple user interface that makes it easy to use in a fast paced env
 
 
 
-<img src="screenshot.png" width="300" />
-<img src="screenshot2.png" width="300" />
+<img src="screenshot.png" width="300" /> &nbsp;&nbsp;&nbsp; <img src="screenshot2.png" width="300" />
+
 # Built With
 *Express
 *Square API
