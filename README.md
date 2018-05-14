@@ -3,7 +3,7 @@ The app is a simple user interface that makes it easy to use in a fast paced env
 
 
 ![picture alt](screenshot.png) ![picture alt](screenshot2.png =100px)
-
+<img src="screenshot.png" width="200" height="200" />
 # Built With
 *Express
 *Square API
